@@ -1,0 +1,11 @@
+{
+  "name": "SalesPoint Chrome",
+  "description": "The SalesPoint Point-of-Sale check out kiosk app for Chrome",
+  "version": "0.0.0.1",
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  },
+  "icons": { "16": "images/quickTickets_16.png", "128": "images/quickTickets_128.png" }
+}
