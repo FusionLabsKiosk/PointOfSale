@@ -7,7 +7,6 @@ body
 {
     color:#eee;
     background: #45484d;
-    background-image:url(../images/slash_it.png);
 }
 
 .hidden
@@ -120,22 +119,4 @@ body>header
     { 
         -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-180deg);
     }
-}
-
-/*page-movies*/
-#page-movies .movie-poster
-{
-    width:200px;
-}
-
-/*page-movie*/
-#page-movie .movie-poster
-{
-    width:100px;
-}
-
-/*page-showing*/
-#page-showing .movie-poster
-{
-    width:50px;
 }

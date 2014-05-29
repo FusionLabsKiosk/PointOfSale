@@ -4,19 +4,18 @@
       <link rel="stylesheet" type="text/css" href="styles/main.css">
       <script src="scripts/lib/jquery-2.1.1.min.js"></script>
       <script src="scripts/main.js"></script>
-      <script src="scripts/objects/Movie.js"></script>
-      <script src="scripts/objects/Showing.js"></script>
-      <script src="scripts/objects/TicketGroup.js"></script>
   </head>
   <body>
       <header>
-          <div class="cinema-name">I0 Mart</div>
+          <div class="store-name">I/0 Mart</div>
       </header>
       
       <div id="slide-container"></div>
       
       <div class="hidden">
           <div id="pages">
+              <div class="page" id="page-initial">
+              </div>
               <div class="page" id="page-processing">
                   <div class="loading-pulse"></div>
                   <div class="loading-image">
@@ -43,7 +42,7 @@
               </div>
               <div class="page" id="page-checkout">
                   <div class="page-content">
-                      <header>Movies</header>
+                      <header>Checkout</header>
                       <div class="reciept">
 					  </div>
                       <div class="reciept-total"></div>
