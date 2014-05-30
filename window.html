@@ -1,69 +1,85 @@
 <!DOCTYPE html>
 <html>
-  <head>
+    <head>
       <link rel="stylesheet" type="text/css" href="styles/main.css">
       <script src="scripts/lib/jquery-2.1.1.min.js"></script>
       <script src="scripts/lib/jquery.velocity.min.js"></script>
       <script src="scripts/main.js"></script>
-  </head>
-  <body>
-      <header>
-          <div class="store-name">I/0 Mart</div>
-      </header>
-      
-      <div id="slide-container"></div>
-      
-      <div class="hidden">
-          <div id="pages">
-              <div class="page" id="page-initial">
-                  <div class="page-content">
-                    <video autoplay="autoplay" loop="true" poster="images/market_poster.png" id="background-video">
+    </head>
+    <body>
+        
+        <div id="transition-wrapper">
+            <div class="page" id="page-initial">
+                <div class="page-container">
+                    <header>
+                        <span class="store-name">I/0 Mart</span>
+                        <span class="page-title"></span>
+                    </header>
+                    <video loop="true" poster="images/market_poster.png" id="background-video">
                         <source src="videos/Food_Market_-_Tomatoes_-_Free_Stock_Video_Footage_.webm" type="video/webm">
                     </video>
                     <div class="user-options">
-                      <button class="start-button english">Start English</button>
-                      <button class="start-button spanish">Start Spanish</button>
+                        <button class="start-button english">Start English</button>
+                        <button class="start-button spanish">Start Spanish</button>
                     </div>
-                  </div>
-              </div>
-              <div class="page" id="page-processing">
+                </div>
+            </div>
+            <div class="page" id="page-checkout">
+                <div class="page-container">
+                    <header>
+                        <span class="store-name">I/0 Mart</span>
+                        <span class="page-title">Checkout</span>
+                    </header>
+                    <div class="content">
+                        <div class="reciept-container">
+                            <header>My Items</header>
+                            <div class="reciept"></div>
+                            <div class="reciept-total"></div>
+                        </div>
+                        <div class="checkout-container">
+                            <div class="checkout-buttons">
+                                <button class="checkout-button">Lookup Item</button>
+                                <button class="checkout-button">Large Item</button>
+                                <button class="checkout-button">Type in SKU</button>
+                                <button class="checkout-button">Call Attendent</button>
+                                <button class="checkout-button">Pay Now</button>
+                                <button class="return-main-menu">Cancel Transaction</button>
+                            </div>
+                        </div>
+<!--
+                        <div class="checkout-buttons">
+                            <button class="checkout-button">Pay with Credit card</button>
+                        </div>
+-->
+                    </div>
+                    <footer>
+                        <button class="call-attendent">Call Attendent</button>
+                        <button class="return-main-menu">Cancel Transaction</button>
+                    </footer>
+                </div>
+            </div>
+        </div>
+
+        <div class="hidden">
+            <div id="pages">
+                
+                <div class="page" id="page-processing">
                   <div class="loading-pulse"></div>
                   <div class="loading-image">
                       <div class="ticket-border top"></div>
                       <div class="ticket-border bottom"></div>
                   </div>
-              </div>
-			  <div class="page" id="page-transaction-processing">
-				<div class="prompt-to-swipe">Please swipe your credit card now.</div>
-				<div class="processing-transaction">Please wait while we process your card...</div>
-				<div class="transaction-complete">
-					<div class="process-thanks">Thank you for shopping with us.</div>
-					<button class="print-reciept">Print(?) Reciept</button>
-				</div>
-			  </div>
-              <div class="page" id="page-checkout">
-                  <div class="page-content">
-                      <header>Checkout</header>
-                      <div class="reciept">
-					  </div>
-                      <div class="reciept-total"></div>
-                      <div class="reciept-buttons">
-							<button class="reciept-button">Lookup Item</button>
-							<button class="reciept-button">Large Item</button>
-							<button class="reciept-button">Type in SKU</button>
-							<button class="reciept-button">Call Attendent</button>
-							<button class="reciept-button">Pay Now</button>
-					  </div>
-					  <div class="checkout-buttons">
-							<button class="reciept-button">Pay with Credit card</button>
-					  </div>
-                      <footer>
-                          <button class="call-attendent">Call Attendent</button>
-						  <button class="return-main-menu">Cancel Transaction</button>
-                      </footer>
-                  </div>
-              </div>
-              <div class="page" id="page-lookup">
+                </div>
+                <div class="page" id="page-transaction-processing">
+                <div class="prompt-to-swipe">Please swipe your credit card now.</div>
+                <div class="processing-transaction">Please wait while we process your card...</div>
+                <div class="transaction-complete">
+                    <div class="process-thanks">Thank you for shopping with us.</div>
+                    <button class="print-reciept">Print(?) Reciept</button>
+                </div>
+                </div>
+                
+                <div class="page" id="page-lookup">
                   <div class="page-content">
                       <img class="item-image" src="" />
                       <div class="item-data">
@@ -73,15 +89,15 @@
                       </div>
                       <footer>
                           <button class="call-attendent">Call Attendent</button>
-						  <button class="return-main-menu">Cancel Transaction</button>
+                          <button class="return-main-menu">Cancel Transaction</button>
                       </footer>
                   </div>
-              </div>
-          </div>
-          <div class="modules">
-          
-          </div>
+                </div>
+            </div>
+            <div class="modules">
+
+            </div>
       </div>
-     
-  </body>
+
+    </body>
 </html>

@@ -1,5 +1,5 @@
 //Global Vars
-var Enum_SlidePosition = {LEFT:'left', RIGHT:'right'};
+var PAGE_OUT_POSITION = {TOP:'top', BOTTOM:'bottom'};
 
 $(document).ready(Init);
 
@@ -9,37 +9,38 @@ function Init()
     var initialPage = '#page-initial';
     AddListeners();
     FormatPages();
-    NavigateTo(initialPage);
+    OpenPage(initialPage);
     document.getElementById('background-video').play();
 }
 
 function AddListeners()
 {
-    $('#page-initial .purchase-tickets').click(Initial_PurchaseTickets_ClickHandler);
-    $('#page-initial .print-tickets').click(Initial_PrintTickets_ClickHandler);
+    $('#page-initial .start-button.english').click(Initial_StartEnglish_ClickHandler);
+    $('#page-initial .start-button.spanish').click(Initial_StartSpanish_ClickHandler);
     
     $('.return-main-menu').unbind('click').click(ReturnMainMenu_ClickHandler);
 }
 
 function FormatPages()
 {
-    var slideContainerHeight = $('body').outerHeight() - $('body>header').outerHeight();
-    $('#slide-container').height(slideContainerHeight);
+    var pageContentHeight = $('.page .page-container').outerHeight() - $('.page .page-container>header').outerHeight();
+    $('.page-container .content').height(pageContentHeight);
 }
 
 //Event Handlers
-function Initial_PurchaseTickets_ClickHandler(e)
-{
-    NavigateTo('#page-movies', Enum_SlidePosition.Right, Prerequisite_Movies);
+function Initial_StartEnglish_ClickHandler(e)
+{ 
+    OpenPage('#page-checkout', PAGE_OUT_POSITION.BOTTOM);
 }
-function Initial_PrintTickets_ClickHandler(e)
+function Initial_StartSpanish_ClickHandler(e)
 {
-    NavigateTo('#page-ticket-search', Enum_SlidePosition.Right);
+    //TODO: change location profile to spanish.
+    OpenPage('#page-checkout', PAGE_OUT_POSITION.BOTTOM);
 }
 
 function ReturnMainMenu_ClickHandler(e)
 {
-    NavigateTo('#page-initial', Enum_SlidePosition.Left);
+    OpenPage('#page-initial', PAGE_OUT_POSITION.BOTTOM);
 }
 
 function PrerequisiteComplete(e)
@@ -49,57 +50,51 @@ function PrerequisiteComplete(e)
     targetPage.removeData('slidePosition');
 }
 
-//Toggles
-
 //Actions
-function NavigateTo(pageName, slidePosition, prerequisiteFunction, parameters)
-{
-    if(prerequisiteFunction == undefined)
-    {
-        OpenPage(pageName, slidePosition);
-    }
-    else
-    {
-        OpenPage('#page-processing', slidePosition);
-        $(pageName).on('prerequisiteComplete', PrerequisiteComplete);
-        $(pageName).data('slidePosition', slidePosition);
-        prerequisiteFunction(parameters);
-    }
-}
+//function NavigateTo(pageName, slidePosition, prerequisiteFunction, parameters)
+//{
+//    if(prerequisiteFunction == undefined)
+//    {
+//        OpenPage(pageName, slidePosition);
+//    }
+//    else
+//    {
+//        OpenPage('#page-processing', slidePosition);
+//        $(pageName).on('prerequisiteComplete', PrerequisiteComplete);
+//        $(pageName).data('slidePosition', slidePosition);
+//        prerequisiteFunction(parameters);
+//    }
+//}
 
-function OpenPage(pageName, slidePosition)
+function OpenPage(pageName, pageOutPosition)
 {
-    var targetPage = $(pageName, '#pages');
+    var targetPage = $(pageName);
     if(targetPage.length > 0)
     {
+        var animationSpeed = 700;
+        
+        var currentPage = $('.page-current');
         targetPage.trigger('beforeopen');
-
-        var newSlideClass = (slidePosition == Enum_SlidePosition.Left) ? 'slide-left' : 'slide-right';
-        var newSlide = $('<div class="slide ' + newSlideClass + '"></div>');
-
-        var currentSlideClass = (slidePosition == Enum_SlidePosition.Left) ? 'slide-right' : 'slide-left';
-        var currentSlide = $('.slide-center');
-
-        newSlide.appendTo('#slide-container');
-        targetPage.detach().appendTo(newSlide);
-
-        currentSlide.addClass(currentSlideClass);
-        currentSlide.removeClass('slide-center');
-
-        //close previous slide after transition
+        
+        //close current page
+        $('.page-current').addClass('page-animate-out');
+        //after animation, remove erroneous classes
         setTimeout(function()
         {
-            ClosePage('#' + $('.page', currentSlide).attr('id'));
-        }, 350);
-
-        //stop 'pop in/out'
+            currentPage.removeClass('page-current');
+            currentPage.removeClass('page-animate-out');
+            targetPage.trigger('afterclose');
+        }, animationSpeed);
+        
+        //open new page
+        targetPage.addClass('page-current');
+        targetPage.addClass('page-animate-in');
+        //after animation, remove erroneous classes
         setTimeout(function()
         {
-            newSlide.addClass('slide-center');
-            newSlide.removeClass(newSlideClass);
-        }, 10);
-
-        targetPage.trigger('afteropen');
+            targetPage.removeClass('page-animate-in');
+            targetPage.trigger('afteropen');
+        }, animationSpeed);
     }
 }
 function ClosePage(pageName)
@@ -138,36 +133,37 @@ function FormatDecimalFromCurrency(value)
     return parseFloat(value.substr(1));
 }
 
-function Prerequisite_Movies()
+function Prerequisite_Checkout()
 {
+    $('#page-movies').trigger('prerequisiteComplete');
     //timeout to allow for page transitions
-    setTimeout(function()
-    {
-        $('#page-movies .movies-carousel').empty();
-        $.each(Movies, function()
-        {
-            if($('.movie[data-id="' + this.ID + '"]', $('#page-movies .movies-carousel')).length == 0)
-            {
-                var movieHTML = ['<div class="movie" data-id="' + this.ID + '">',
-                                      '<img class="movie-poster" src="' + this.PosterURL + '" />',
-                                      '<div class="movie-data">',
-                                          '<div class="movie-title">' + this.Title + '</div>',
-                                          '<div class="movie-rating">' + this.Rating + '</div>',
-                                      '</div>',
-                                      '<button class="view-show-times">View Show Times</button>',
-                                  '</div>'];
-
-                var movieString = movieHTML.join('');
-                $('#page-movies .movies-carousel').append(movieString);
-            }
-        });
-        
-        //add listeners to view movie show times
-        $('#page-movies .view-show-times').unbind('click').click(Movies_ViewShowTimes_ClickHandler);
-        
-        setTimeout(function(){$('#page-movies').trigger('prerequisiteComplete');}, 750);
-        
-    }, 350);
+//    setTimeout(function()
+//    {
+//        $('#page-movies .movies-carousel').empty();
+//        $.each(Movies, function()
+//        {
+//            if($('.movie[data-id="' + this.ID + '"]', $('#page-movies .movies-carousel')).length == 0)
+//            {
+//                var movieHTML = ['<div class="movie" data-id="' + this.ID + '">',
+//                                      '<img class="movie-poster" src="' + this.PosterURL + '" />',
+//                                      '<div class="movie-data">',
+//                                          '<div class="movie-title">' + this.Title + '</div>',
+//                                          '<div class="movie-rating">' + this.Rating + '</div>',
+//                                      '</div>',
+//                                      '<button class="view-show-times">View Show Times</button>',
+//                                  '</div>'];
+//
+//                var movieString = movieHTML.join('');
+//                $('#page-movies .movies-carousel').append(movieString);
+//            }
+//        });
+//        
+//        //add listeners to view movie show times
+//        $('#page-movies .view-show-times').unbind('click').click(Movies_ViewShowTimes_ClickHandler);
+//        
+//        setTimeout(function(){$('#page-movies').trigger('prerequisiteComplete');}, 750);
+//        
+//    }, 350);
 }
 function Prerequisite_Movie()
 {
