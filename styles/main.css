@@ -50,11 +50,59 @@ body>header
     overflow: auto;
 }
 
+body>header
+{
+    background-color:rgb(108, 192, 43);
+    color:#fff;
+    font-size:2em;
+    padding:.5em .2em;
+}
+
 .page
 {
     width:100%;
     height:100%;
     padding:20px;
+}
+
+/*page-initial*/
+#page-initial .page-content
+{
+    height:100%;
+}
+#page-initial #background-video
+{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    background: url(../images/market_poster.png) no-repeat;
+    background-size: cover;
+}
+#page-initial .user-options
+{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height:100%;
+}
+#page-initial .start-button
+{
+    background-color: transparent;
+    border-radius: 2em;
+    font-size: 3.5em;
+    border: solid .1em #fff;
+    padding: 1em 2em;
+    color: #FFF;
+    outline: none;
+}
+#page-initial .start-button.english
+{
+    margin-right:1em;
 }
 
 /*page-processing*/

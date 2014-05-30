@@ -3,6 +3,7 @@
   <head>
       <link rel="stylesheet" type="text/css" href="styles/main.css">
       <script src="scripts/lib/jquery-2.1.1.min.js"></script>
+      <script src="scripts/lib/jquery.velocity.min.js"></script>
       <script src="scripts/main.js"></script>
   </head>
   <body>
@@ -15,6 +16,15 @@
       <div class="hidden">
           <div id="pages">
               <div class="page" id="page-initial">
+                  <div class="page-content">
+                    <video autoplay="autoplay" loop="true" poster="images/market_poster.png" id="background-video">
+                        <source src="videos/Food_Market_-_Tomatoes_-_Free_Stock_Video_Footage_.webm" type="video/webm">
+                    </video>
+                    <div class="user-options">
+                      <button class="start-button english">Start English</button>
+                      <button class="start-button spanish">Start Spanish</button>
+                    </div>
+                  </div>
               </div>
               <div class="page" id="page-processing">
                   <div class="loading-pulse"></div>
@@ -31,15 +41,6 @@
 					<button class="print-reciept">Print(?) Reciept</button>
 				</div>
 			  </div>
-              <div class="page" id="page-initial">
-                  <div class="page-content">
-                      <div class="welcome"></div>
-                      <div class="user-options">
-                          <button class="start-button">Start English</button>
-                          <button class="start-button">Start Spanish</button>
-                      </div>
-                  </div>
-              </div>
               <div class="page" id="page-checkout">
                   <div class="page-content">
                       <header>Checkout</header>
@@ -76,6 +77,9 @@
                       </footer>
                   </div>
               </div>
+          </div>
+          <div class="modules">
+          
           </div>
       </div>
      
