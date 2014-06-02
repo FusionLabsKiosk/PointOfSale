@@ -2,6 +2,7 @@
 var data = {};
 
 data.products = {};
+data.productArray = [];
 
 
 data.initialize = function() {
@@ -13,13 +14,17 @@ data.initializeJson = function(json) {
         var p = new Product();
         p.sku = json.products[i].sku;
         p.name = json.products[i].name;
-        p.price = json.products[i].price;
-        p.discount = json.products[i].discount;
-        p.upc = json.products[i].upc;
-        p.plu = json.products[i].plu;
-        p.weight = json.products[i].weight;
+        p.description = json.products[i].description;
+        p.unitPrice =  parseFloat(json.products[i].unitPrice);
+        p.weightPrice = parseFloat(json.products[i].weightPrice);
+        p.weightUnit = json.products[i].weightUnit;
+        p.discount = parseFloat(json.products[i].discount);
+        p.upc = parseInt(json.products[i].upc);
+        p.plu = parseInt(json.products[i].plu);
+        p.imageUrl = json.products[i].imageUrl;
         
         data.products[p.sku] = p;
+        data.productArray.push(p);
     }
 };
 

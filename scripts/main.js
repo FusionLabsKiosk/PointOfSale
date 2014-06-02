@@ -1,15 +1,17 @@
 //Global Vars
 var PAGE_OUT_POSITION = {TOP:'top', BOTTOM:'bottom'};
 
+var CurrentSession;
+
 $(document).ready(Init);
 
 //Process
 function Init()
 {
     var initialPage = '#page-initial';
+    data.initialize();
     AddListeners();
-    FormatPages();
-    OpenPage(initialPage);
+    ReturnMainMenu_ClickHandler();
     document.getElementById('background-video').play();
 }
 
@@ -18,13 +20,14 @@ function AddListeners()
     $('#page-initial .start-button.english').click(Initial_StartEnglish_ClickHandler);
     $('#page-initial .start-button.spanish').click(Initial_StartSpanish_ClickHandler);
     
+    $('#page-checkout #lookup-item').click(Checkout_LookupItem_ClickHandler);
+    $('#page-lookup').on('beforeopen', Lookup_BeforeOpenHandler);
+    $('#page-lookup').on('beforesearch', Lookup_BeforeSearchHandler);
+    $('#page-lookup').on('aftersearch', Lookup_AfterSearchHandler);
+    
+    $('#page-lookup .return-checkout').click(Lookup_ReturnCheckout_ClickHandler);
+    
     $('.return-main-menu').unbind('click').click(ReturnMainMenu_ClickHandler);
-}
-
-function FormatPages()
-{
-    var pageContentHeight = $('.page .page-container').outerHeight() - $('.page .page-container>header').outerHeight();
-    $('.page-container .content').height(pageContentHeight);
 }
 
 //Event Handlers
@@ -37,10 +40,46 @@ function Initial_StartSpanish_ClickHandler(e)
     //TODO: change location profile to spanish.
     OpenPage('#page-checkout', PAGE_OUT_POSITION.BOTTOM);
 }
+function Checkout_LookupItem_ClickHandler(e)
+{
+    OpenPage('#page-lookup', PAGE_OUT_POSITION.BOTTOM);
+}
+function Lookup_BeforeOpenHandler(e)
+{
+    ProductSearch();
+}
+function Lookup_BeforeSearchHandler(e)
+{
+    $('#page-lookup .search-results').empty();
+    $('#modules .loading-animation').clone().appendTo('#page-lookup .search-results');
+}
+function Lookup_AfterSearchHandler(e)
+{
+    $('#page-lookup .search-results .loading-animation').remove();
+    $('#page-lookup .search-results .search-result').addClass('search-result-animation-in');
+    setTimeout(function()
+    {
+        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-in');
+//        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-1');
+//        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-2');
+//        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-3');
+//        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-4');
+//        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-5');
+//        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-6');
+//        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-7');
+//        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-8');
+    }, 1000);
+}
 
 function ReturnMainMenu_ClickHandler(e)
 {
+    CurrentSession = new Session();
+    CurrentSession.currency = '$';
     OpenPage('#page-initial', PAGE_OUT_POSITION.BOTTOM);
+}
+function Lookup_ReturnCheckout_ClickHandler(e)
+{
+    OpenPage('#page-checkout', PAGE_OUT_POSITION.BOTTOM);
 }
 
 function PrerequisiteComplete(e)
@@ -51,6 +90,39 @@ function PrerequisiteComplete(e)
 }
 
 //Actions
+function ProductSearch(query)
+{
+    $('#page-lookup').trigger('beforesearch');
+    if(query == undefined)
+    {
+        //mock delay for loading animation
+        setTimeout(function()
+        {
+            for(var i=0; i<data.productArray.length; i++)
+            {
+                var product = data.productArray[i];
+                var productElement = $(product.getSearchResult());
+                
+                if(i < 8)
+                {
+                    productElement.addClass('search-result-animation-' + (i+1).toString());
+                }
+                
+                $('#page-lookup .search-results').append(productElement);
+            }
+            $('#page-lookup').trigger('aftersearch');
+        }, 3000);
+        return;
+        
+    }
+    else
+    {
+        $('#page-lookup').trigger('aftersearch');
+    }
+    
+    
+}
+
 //function NavigateTo(pageName, slidePosition, prerequisiteFunction, parameters)
 //{
 //    if(prerequisiteFunction == undefined)

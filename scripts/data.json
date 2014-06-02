@@ -2,13 +2,16 @@
     "products": [
         {
             "sku": "558c4e6a",
-            "name": "Encididunt",
-            "price": "$5.31",
-            "discount": "$2.75",
+            "name": "12pk Drinka Cola",
+            "description": "12 Pack of 12 oz cans of Drinka Cola",
+            "unitPrice": "5.31",
+            "weightPrice": 0,
+            "weightUnit": "lbs",
+            "discount": "2.75",
             "upc": 161309694545,
             "plu": 40220,
-            "priceWeight": 2.9
-        },
+            "imageUrl": "images/productImages/drinkacola.png"
+        },        
         {
             "sku": "31b1c70b",
             "name": "Neprehenderit",
