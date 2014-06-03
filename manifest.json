@@ -7,5 +7,7 @@
       "scripts": ["background.js"]
     }
   },
-  "icons": { "16": "images/quickTickets_16.png", "128": "images/quickTickets_128.png" }
+  "icons": { "16": "images/quickTickets_16.png", "128": "images/quickTickets_128.png" },
+  
+  "default_locale": "en"
 }

@@ -1,0 +1,66 @@
+{
+    "storeName": {
+        "message": "I/O Mart",
+        "description": "The name of the store"
+    },
+    "startButtonEnglish": {
+        "message": "Start English",
+        "description": "Start the application in English"
+    },
+    "startButtonSpanish": {
+        "message": "Start Spanish",
+        "description": "Start the application in Spanish"
+    },
+    "callAttendent": {
+        "message": "Call Attendent",
+        "description": "Notifies an attendant that help is needed"
+    },
+    "returnMainMenu": {
+        "message": "Cancel Transaction",
+        "description": "Cancels the current transaction and returns to the main menu"
+    },
+    "returnCheckout": {
+        "message": "Return to Checkout",
+        "description": "Returns to the checkout screen"
+    },
+    
+    "pageCheckoutTitle": {
+        "message": "Checkout",
+        "description": "The checkout page title"
+    },
+    "pageCheckoutReceiptHeader": {
+        "message": "My Items",
+        "description": "The header of the receipt items"
+    },
+    "pageCheckoutSubtotalTitle": {
+        "message": "Subtotal",
+        "description": "The subtotal of all the receipt items"
+    },
+    "pageCheckoutTaxTitle": {
+        "message": "Tax",
+        "description": "The total tax of all the receipt items"
+    },
+    "pageCheckoutTotalTitle": {
+        "message": "Total",
+        "description": "The grand total of all the receipt items"
+    },
+    
+    "lookupItem": {
+        "message": "Lookup Item",
+        "description": "Prompts the user to look up an item by name/picture"
+    },
+    "largeItem": {
+        "message": "Large Item",
+        "description": "Calls the cashier to scan a large item"
+    },
+    "typeInSku": {
+        "message": "Type In SKU",
+        "description": "Allows the user to type in an SKU instead of scanning"
+    },
+    "payNow": {
+        "message": "Pay Now",
+        "description": "Starts the payment process"
+    }
+    
+    
+}

@@ -9,6 +9,7 @@ $(document).ready(Init);
 //Process
 function Init()
 {
+    InitializeLocales();
     var initialPage = '#page-initial';
     data.initialize();
     AddListeners();
