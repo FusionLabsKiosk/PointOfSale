@@ -60,15 +60,20 @@ function Lookup_AfterSearchHandler(e)
     setTimeout(function()
     {
         $('#page-lookup .search-results .search-result').removeClass('search-result-animation-in');
-//        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-1');
-//        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-2');
-//        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-3');
-//        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-4');
-//        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-5');
-//        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-6');
-//        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-7');
-//        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-8');
+        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-1');
+        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-2');
+        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-3');
+        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-4');
+        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-5');
+        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-6');
+        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-7');
+        $('#page-lookup .search-results .search-result').removeClass('search-result-animation-8');
     }, 1000);
+}
+function Lookup_SearchItem_ClickHandler(e)
+{
+    AddProduct();
+    OpenPage('#page-checkout', PAGE_OUT_POSITION.BOTTOM);
 }
 
 function ReturnMainMenu_ClickHandler(e)
@@ -108,6 +113,7 @@ function ProductSearch(query)
                     productElement.addClass('search-result-animation-' + (i+1).toString());
                 }
                 
+                productElement.click(Lookup_SearchItem_ClickHandler);
                 $('#page-lookup .search-results').append(productElement);
             }
             $('#page-lookup').trigger('aftersearch');
@@ -120,6 +126,11 @@ function ProductSearch(query)
         $('#page-lookup').trigger('aftersearch');
     }
     
+    
+}
+
+function AddProduct()
+{
     
 }
 

@@ -277,6 +277,11 @@ button{font-family:'open_sanscondensed_light' sans-serif;}
     font-size: 1.3em;
     background-color:#fff;
 }
+#page-lookup .search-result:active
+{
+    -webkit-transition-duration: 0.2s;
+    -webkit-transform: scale(0.95);
+}
 #page-lookup .search-result .product-image
 {
     height: 100px;
