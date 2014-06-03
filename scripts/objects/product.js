@@ -47,6 +47,5 @@ function Product()
         
         var searchResultString = searchResultHTML.join('');
         return searchResultString;
-            
     }
 }

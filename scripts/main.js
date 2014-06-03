@@ -2,6 +2,7 @@
 var PAGE_OUT_POSITION = {TOP:'top', BOTTOM:'bottom'};
 
 var CurrentSession;
+var SearchIntervalID;
 
 $(document).ready(Init);
 
@@ -21,13 +22,21 @@ function AddListeners()
     $('#page-initial .start-button.spanish').click(Initial_StartSpanish_ClickHandler);
     
     $('#page-checkout #lookup-item').click(Checkout_LookupItem_ClickHandler);
+    $('#page-checkout #large-item').click(Checkout_LargeItem_ClickHandler);
+    $('#page-checkout #type-in-sku').click(Checkout_TypeInSKU_ClickHandler);
+    $('#page-checkout #pay-now').click(Checkout_PayNow_ClickHandler);
+    
     $('#page-lookup').on('beforeopen', Lookup_BeforeOpenHandler);
     $('#page-lookup').on('beforesearch', Lookup_BeforeSearchHandler);
     $('#page-lookup').on('aftersearch', Lookup_AfterSearchHandler);
+    $('#page-lookup #item-search-query').keyup(Lookup_ItemSearchQuery_KeyUpHandler);
     
-    $('#page-lookup .return-checkout').click(Lookup_ReturnCheckout_ClickHandler);
-    
+    $('.return-checkout').click(Lookup_ReturnCheckout_ClickHandler);
     $('.return-main-menu').unbind('click').click(ReturnMainMenu_ClickHandler);
+    
+    $('#overlay-large-item .cancel').click(LargeItem_Cancel_ClickHandler);
+    $('#overlay-type-in-sku .cancel').click(TypeInSKU_Cancel_ClickHandler);
+    $('#overlay-type-in-sku .continue').click(TypeInSKU_Continue_ClickHandler);
 }
 
 //Event Handlers
@@ -44,14 +53,38 @@ function Checkout_LookupItem_ClickHandler(e)
 {
     OpenPage('#page-lookup', PAGE_OUT_POSITION.BOTTOM);
 }
+function Checkout_LargeItem_ClickHandler(e)
+{
+    OpenOverlay('overlay-large-item', $('#page-checkout'));
+}
+function Checkout_TypeInSKU_ClickHandler(e)
+{
+    OpenOverlay('overlay-type-in-sku', $('#page-checkout'));
+}
+function Checkout_PayNow_ClickHandler(e)
+{
+    OpenPage('#page-payment-options', PAGE_OUT_POSITION.BOTTOM);
+}
 function Lookup_BeforeOpenHandler(e)
 {
     ProductSearch();
 }
 function Lookup_BeforeSearchHandler(e)
 {
-    $('#page-lookup .search-results').empty();
-    $('#modules .loading-animation').clone().appendTo('#page-lookup .search-results');
+    if($('#page-lookup .search-results .search-result').length > 0)
+    {
+        $('#page-lookup .search-results .search-result').addClass('search-result-animation-out');
+        setTimeout(function()
+        {
+            $('#page-lookup .search-results').empty();
+            $('#modules .loading-animation').clone().appendTo('#page-lookup .search-results');
+        }, 1000);
+    }
+    else
+    {
+        $('#page-lookup .search-results').empty();
+        $('#modules .loading-animation').clone().appendTo('#page-lookup .search-results');
+    }
 }
 function Lookup_AfterSearchHandler(e)
 {
@@ -72,8 +105,17 @@ function Lookup_AfterSearchHandler(e)
 }
 function Lookup_SearchItem_ClickHandler(e)
 {
-    AddProduct();
+    var sku = $('.title .sku', $(this)).html();
+    AddItemToReceipt(sku);
+    
     OpenPage('#page-checkout', PAGE_OUT_POSITION.BOTTOM);
+    $('#page-lookup #item-search-query').val('');
+}
+function Lookup_ItemSearchQuery_KeyUpHandler(e)
+{
+    var i = 0;
+    clearInterval(SearchIntervalID);
+    SearchIntervalID = setInterval(function(){UpdateProgress_SearchTimer(i);i++;}, 1);
 }
 
 function ReturnMainMenu_ClickHandler(e)
@@ -87,11 +129,18 @@ function Lookup_ReturnCheckout_ClickHandler(e)
     OpenPage('#page-checkout', PAGE_OUT_POSITION.BOTTOM);
 }
 
-function PrerequisiteComplete(e)
+function LargeItem_Cancel_ClickHandler(e)
 {
-    var targetPage = $(e.target);
-    OpenPage('#' + targetPage.attr('id'), targetPage.data('slidePosition'));
-    targetPage.removeData('slidePosition');
+    CloseOverlay($('#overlay-large-item'), $('#page-checkout'));
+}
+function TypeInSKU_Cancel_ClickHandler(e)
+{
+    CloseOverlay($('#overlay-type-in-sku'), $('#page-checkout')); 
+}
+function TypeInSKU_Continue_ClickHandler(e)
+{
+    //TODO: Add functionality to add item by SKU
+    CloseOverlay($('#overlay-type-in-sku'), $('#page-checkout')); 
 }
 
 //Actions
@@ -117,37 +166,60 @@ function ProductSearch(query)
                 $('#page-lookup .search-results').append(productElement);
             }
             $('#page-lookup').trigger('aftersearch');
-        }, 3000);
-        return;
-        
+        }, 2000);
     }
     else
     {
-        $('#page-lookup').trigger('aftersearch');
+        setTimeout(function()
+        {
+            for(var i=0; i<data.productArray.length; i++)
+            {
+                var product = data.productArray[i];
+
+                var searchTerm = query.toLowerCase();
+                var matchTerm = product.name.toLowerCase();
+                if(matchTerm.indexOf(searchTerm) > -1)
+                {
+                    var productElement = $(product.getSearchResult());
+
+                    if(i < 8)
+                    {
+                        productElement.addClass('search-result-animation-' + (i+1).toString());
+                    }
+
+                    productElement.click(Lookup_SearchItem_ClickHandler);
+                    $('#page-lookup .search-results').append(productElement);
+                }
+            }
+            $('#page-lookup').trigger('aftersearch');
+        }, 2000);
     }
     
     
 }
 
-function AddProduct()
+function AddItemToReceipt(sku)
 {
-    
+    CurrentSession.receipt.addItem(sku);
+    $('#page-checkout .receipt-container .receipt-totals .receipt-subtotal .amount').html(FormatCurrency(CurrentSession.receipt.getSubTotal()));
+    $('#page-checkout .receipt-container .receipt-totals .receipt-tax .amount').html(FormatCurrency(CurrentSession.receipt.getTaxes()));
+    $('#page-checkout .receipt-container .receipt-totals .receipt-total .amount').html(FormatCurrency(CurrentSession.receipt.getGrandTotal()));
 }
 
-//function NavigateTo(pageName, slidePosition, prerequisiteFunction, parameters)
-//{
-//    if(prerequisiteFunction == undefined)
-//    {
-//        OpenPage(pageName, slidePosition);
-//    }
-//    else
-//    {
-//        OpenPage('#page-processing', slidePosition);
-//        $(pageName).on('prerequisiteComplete', PrerequisiteComplete);
-//        $(pageName).data('slidePosition', slidePosition);
-//        prerequisiteFunction(parameters);
-//    }
-//}
+function UpdateProgress_SearchTimer(interval)
+{
+    if(interval < 200)
+    {
+        $('#page-lookup #search-timer-progress').val(interval);
+    }
+    else
+    {
+        clearInterval(SearchIntervalID);
+        $('#page-lookup #search-timer-progress').val(0);
+        var searchQuery = $('#page-lookup #item-search-query').val();
+        ProductSearch(searchQuery);
+    }
+}
 
 function OpenPage(pageName, pageOutPosition)
 {
@@ -180,158 +252,50 @@ function OpenPage(pageName, pageOutPosition)
         }, animationSpeed);
     }
 }
-function ClosePage(pageName)
-{
-    var targetPage = $(pageName, '#slide-container');
-    if(targetPage.length > 0)
-    {
-        targetPage.trigger('beforeclose');
-        var parentSlide = targetPage.closest('.slide');
-        targetPage.detach().appendTo('#pages');
-        $('input[type="text"]', targetPage).val('');
-        $('input[type="number"]', targetPage).val('1');
-        parentSlide.remove();
-        targetPage.trigger('afterclose');
-    }
-}
 
-function OpenSection(page, section)
+function OpenOverlay(overlayID, page)
 {
-    CloseSections(page, section);;
-    section.slideDown();
-    section.addClass('open');
+    $('.overlay', page).css('display', 'block');
+    $('#overlays #' + overlayID).detach().appendTo($('.overlay .foreground .foreground-container', page));
+    $('.overlay .foreground .foreground-container', page).addClass('overlay-foreground-animation-in');
+    $('.overlay .background', page).addClass('overlay-background-animation-in');
     
+    setTimeout(function()
+    {        
+        $('.overlay .foreground .foreground-container', page).removeClass('overlay-foreground-animation-in');
+        $('.overlay .background', page).removeClass('overlay-background-animation-in');
+    }, 700);
 }
-function CloseSections(page, section)
+function CloseOverlay(overlayElement, page)
 {
-    $('section.open', page).slideUp().removeClass('open');
+    $('.overlay .foreground .foreground-container', page).addClass('overlay-foreground-animation-out');
+    $('.overlay .background', page).addClass('overlay-background-animation-out');
+    setTimeout(function()
+    {
+        $('.overlay', page).css('display', 'none');
+        overlayElement.detach().appendTo('#overlays');
+        
+        $('.overlay .foreground .foreground-container', page).removeClass('overlay-foreground-animation-out');
+        $('.overlay .background', page).removeClass('overlay-background-animation-out');
+    }, 700);   
 }
 
-function FormatCurrency(value)
+/*helper-functions*/
+function FormatCurrency(value, hideCurrencyType)
 {
-    return '$' + parseFloat(value, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
+    var formattedCurrency = '';
+    if(hideCurrencyType === true)
+    {
+        formattedCurrency =  parseFloat(value, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
+    }
+    else
+    {
+        formattedCurrency = CurrentSession.currency + parseFloat(value, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
+    }
+    return formattedCurrency;
 }
 function FormatDecimalFromCurrency(value)
 {
     return parseFloat(value.substr(1));
-}
-
-function Prerequisite_Checkout()
-{
-    $('#page-movies').trigger('prerequisiteComplete');
-    //timeout to allow for page transitions
-//    setTimeout(function()
-//    {
-//        $('#page-movies .movies-carousel').empty();
-//        $.each(Movies, function()
-//        {
-//            if($('.movie[data-id="' + this.ID + '"]', $('#page-movies .movies-carousel')).length == 0)
-//            {
-//                var movieHTML = ['<div class="movie" data-id="' + this.ID + '">',
-//                                      '<img class="movie-poster" src="' + this.PosterURL + '" />',
-//                                      '<div class="movie-data">',
-//                                          '<div class="movie-title">' + this.Title + '</div>',
-//                                          '<div class="movie-rating">' + this.Rating + '</div>',
-//                                      '</div>',
-//                                      '<button class="view-show-times">View Show Times</button>',
-//                                  '</div>'];
-//
-//                var movieString = movieHTML.join('');
-//                $('#page-movies .movies-carousel').append(movieString);
-//            }
-//        });
-//        
-//        //add listeners to view movie show times
-//        $('#page-movies .view-show-times').unbind('click').click(Movies_ViewShowTimes_ClickHandler);
-//        
-//        setTimeout(function(){$('#page-movies').trigger('prerequisiteComplete');}, 750);
-//        
-//    }, 350);
-}
-function Prerequisite_Movie()
-{
-    //timeout to allow for page transitions
-    setTimeout(function()
-    {        
-        $('#page-movie').data('movie', SelectedMovie);
-        
-        $('#page-movie .movie-poster').attr('src', SelectedMovie.PosterURL);
-        $('#page-movie .movie-data .movie-title').html(SelectedMovie.Title);
-        $('#page-movie .movie-data .movie-synopsis').html(SelectedMovie.Synopsis);
-        $('#page-movie .movie-data .movie-rating').html(SelectedMovie.Rating);
-        $('#page-movie .movie-data .movie-runtime').html(SelectedMovie.Runtime);
-        
-        $.each(SelectedMovie.Cast, function()
-        {
-            var castMemberElement = '<div class="castMember">' + this + '</div>';
-            $('#page-movie .movie-data .movie-cast').append(castMemberElement);
-        });
-        
-        $.each(SelectedMovie.Directors, function()
-        {
-            var directorElement = '<div class="director">' + this + '</div>';
-            $('#page-movie .movie-data .movie-directors').append(directorElement);
-        });
-        
-        $('#page-movie .movie-showings').empty();
-        $.each(SelectedMovie.Showings, function()
-        {
-            if($('.movie-showing[data-id="' + this.ID + '"]', $('#page-movie .movie-showings')).length == 0)
-            {
-                var showingHTML = ['<li class="movie-showing" data-id="' + this.ID + '">',
-                                          '<span class="showing-time">' + this.StartTime + '</span>',
-                                          '<span class="showing-type">' + this.TheaterType + '</span>',
-                                      '</li>'];
-
-                var showingString = showingHTML.join('');
-                $('#page-movie .movie-showings').append(showingString);
-            }
-        });
-        
-        //add listeners to view movie show times
-        $('#page-movie .movie-showing').unbind('click').click(Movie_MovieShowing_ClickHandler);
-        
-        setTimeout(function(){$('#page-movie').trigger('prerequisiteComplete');}, 600);
-        
-    }, 350);
-}
-function Prerequisite_Showing()
-{
-    //timeout to allow for page transitions
-    setTimeout(function()
-    {        
-        $('#page-showing .movie-data').empty();
-        var movieDataHTML = ['<img class="movie-poster" src="' + SelectedMovie.PosterURL + '" />',
-                            '<div class="movie-title">' + SelectedMovie.Title + '</div>',
-                            '<div class="movie-showing-tickets"></div>'];
-        
-        var movieDataString = movieDataHTML.join('');
-        $('#page-showing .movie-data').append(movieDataString);
-        
-        AddTicketTypeForm();
-        
-        setTimeout(function(){$('#page-showing').trigger('prerequisiteComplete');}, 600);
-        
-    }, 350);
-}
-function Prerequisite_Purchase()
-{
-    //timeout to allow for page transitions
-    setTimeout(function()
-    {
-        $('#page-purchase .tickets-data').empty();
-        
-        var transactionTotal = 0;
-        $.each(SelectedTickets, function()
-        {
-            AddTicketGroup(this);
-            transactionTotal += this.Total;
-        });
-        
-        $('#page-purchase .transaction-data .total-value').html(FormatCurrency(transactionTotal));
-        
-        setTimeout(function(){$('#page-purchase').trigger('prerequisiteComplete');}, 600);
-        
-    }, 350);
 }
 
