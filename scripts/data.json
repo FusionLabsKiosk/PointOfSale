@@ -27,7 +27,7 @@
         {
             "sku": "ee407035",
             "name": "Product Name",
-            "description": "",
+            "description": "Product description",
             "unitPrice": 4.92,
             "weightPrice": 0,
             "weightUnit": "lbs",
@@ -39,7 +39,7 @@
         {
             "sku": "47dda300",
             "name": "Product Name",
-            "description": "",
+            "description": "Product description",
             "unitPrice": 9.48,
             "weightPrice": 0,
             "weightUnit": "lbs",
@@ -51,7 +51,7 @@
         {
             "sku": "418d202d",
             "name": "Product Name",
-            "description": "",
+            "description": "Product description",
             "unitPrice": 8.73,
             "weightPrice": 0,
             "weightUnit": "lbs",
@@ -63,7 +63,7 @@
         {
             "sku": "fc14691a",
             "name": "Product Name",
-            "description": "",
+            "description": "Product description",
             "unitPrice": 6.99,
             "weightPrice": 0,
             "weightUnit": "lbs",
@@ -75,7 +75,7 @@
         {
             "sku": "35c3a07f",
             "name": "Product Name",
-            "description": "",
+            "description": "Product description",
             "unitPrice": 8.45,
             "weightPrice": 0,
             "weightUnit": "lbs",
@@ -87,7 +87,7 @@
         {
             "sku": "57b0d37d",
             "name": "Product Name",
-            "description": "",
+            "description": "Product description",
             "unitPrice": 8.65,
             "weightPrice": 0,
             "weightUnit": "lbs",
@@ -99,7 +99,7 @@
         {
             "sku": "cb5fc6d6",
             "name": "Product Name",
-            "description": "",
+            "description": "Product description",
             "unitPrice": 7.88,
             "weightPrice": 0,
             "weightUnit": "lbs",
@@ -111,7 +111,7 @@
         {
             "sku": "af32d9e1",
             "name": "Product Name",
-            "description": "",
+            "description": "Product description",
             "unitPrice": 5.58,
             "weightPrice": 0,
             "weightUnit": "lbs",
@@ -123,7 +123,7 @@
         {
             "sku": "475a585e",
             "name": "Product Name",
-            "description": "",
+            "description": "Product description",
             "unitPrice": 7.65,
             "weightPrice": 0,
             "weightUnit": "lbs",
@@ -135,7 +135,7 @@
         {
             "sku": "92e4d7bf",
             "name": "Product Name",
-            "description": "",
+            "description": "Product description",
             "unitPrice": 4.9,
             "weightPrice": 0,
             "weightUnit": "lbs",
@@ -147,7 +147,7 @@
         {
             "sku": "e861ba6d",
             "name": "Product Name",
-            "description": "",
+            "description": "Product description",
             "unitPrice": 6.31,
             "weightPrice": 0,
             "weightUnit": "lbs",
@@ -159,7 +159,7 @@
         {
             "sku": "b277d1d2",
             "name": "Product Name",
-            "description": "",
+            "description": "Product description",
             "unitPrice": 4.44,
             "weightPrice": 0,
             "weightUnit": "lbs",
@@ -171,7 +171,7 @@
         {
             "sku": "229e137a",
             "name": "Product Name",
-            "description": "",
+            "description": "Product description",
             "unitPrice": 6.7,
             "weightPrice": 0,
             "weightUnit": "lbs",
@@ -183,7 +183,7 @@
         {
             "sku": "d8950868",
             "name": "Product Name",
-            "description": "",
+            "description": "Product description",
             "unitPrice": 5,
             "weightPrice": 0,
             "weightUnit": "lbs",
@@ -195,7 +195,7 @@
         {
             "sku": "3e263190",
             "name": "Product Name",
-            "description": "",
+            "description": "Product description",
             "unitPrice": 9.03,
             "weightPrice": 0,
             "weightUnit": "lbs",
@@ -207,7 +207,7 @@
         {
             "sku": "3d458c2a",
             "name": "Product Name",
-            "description": "",
+            "description": "Product description",
             "unitPrice": 4.94,
             "weightPrice": 0,
             "weightUnit": "lbs",
@@ -219,7 +219,7 @@
         {
             "sku": "75c0d745",
             "name": "Product Name",
-            "description": "",
+            "description": "Product description",
             "unitPrice": 7.36,
             "weightPrice": 0,
             "weightUnit": "lbs",
@@ -231,7 +231,7 @@
         {
             "sku": "957576d0",
             "name": "Product Name",
-            "description": "",
+            "description": "Product description",
             "unitPrice": 7.66,
             "weightPrice": 0,
             "weightUnit": "lbs",

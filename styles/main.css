@@ -319,7 +319,15 @@ button{font-family:'open_sanscondensed_light' sans-serif;}
     flex:7;
     font-size:2em;
     font-family:monospace;
+    overflow: auto;
     padding:.5em;
+}
+#page-checkout .receipt-container .receipt .receipt-item {
+    display: flex;
+    justify-content: space-between;
+}
+#page-checkout .receipt-container .receipt .receipt-item .product-total {
+    text-align: right;
 }
 #page-checkout .receipt-container .receipt-divider
 {
@@ -343,7 +351,8 @@ button{font-family:'open_sanscondensed_light' sans-serif;}
 #page-checkout .receipt-container .receipt-totals .total
 {
     display:flex;
-    justify-content: flex-end;
+    margin-left: 5em;
+    justify-content: space-between;
 }
 #page-checkout .receipt-container .receipt-totals .total .title
 {

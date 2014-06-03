@@ -19,6 +19,7 @@ function Reinit()
 {
     CurrentSession = new Session();
     CurrentSession.currency = '$';
+    scanner.scanning = true;
     
     $('#page-checkout .receipt').empty();
     $('#page-checkout .total .amount').html('$0.00');
@@ -30,11 +31,11 @@ function AddListeners()
     
     $('#page-initial .start-button.english').click(Initial_StartEnglish_ClickHandler);
     $('#page-initial .start-button.spanish').click(Initial_StartSpanish_ClickHandler);
+    $('#page-initial').on('scanner', Initial_ScannerHandler);
     
     $('#page-checkout').on('beforeopen', Checkout_BeforeOpenHandler);
     $('#page-checkout').on('afterclose', Checkout_AfterCloseHandler);
     $('#page-checkout').on('scanner', Checkout_ScannerHandler);
-    scanner.alert.push($('#page-checkout'));
     $('#page-checkout #lookup-item').click(Checkout_LookupItem_ClickHandler);
     $('#page-checkout #large-item').click(Checkout_LargeItem_ClickHandler);
     $('#page-checkout #type-in-sku').click(Checkout_TypeInSKU_ClickHandler);
@@ -50,7 +51,6 @@ function AddListeners()
     
     $('#overlay-large-item').click(LargeItem_Cancel_ClickHandler);
     $('#overlay-large-item').on('scanner', LargeItem_Cancel_ClickHandler);
-    scanner.alert.push($('#overlay-large-item'));
     $('#overlay-large-item .cancel').click(LargeItem_Cancel_ClickHandler);
     $('#overlay-type-in-sku .cancel').click(TypeInSKU_Cancel_ClickHandler);
     $('#overlay-type-in-sku .continue').click(TypeInSKU_Continue_ClickHandler);
@@ -58,11 +58,10 @@ function AddListeners()
 
 //Event Handlers
 var scanner = {};
-scanner.scanning = false;
+scanner.scanning = true;
 scanner.scanStart = 0;
 scanner.buffer = [];
 scanner.delay = 250;
-scanner.alert = [];
 
 function Scanner_Listener(e) 
 {
@@ -81,9 +80,7 @@ function Scanner_Listener(e)
         
         if (e.keyCode === 13) {
             if ((Date.now() - scanner.scanStart) < scanner.delay) {
-                for (var i = 0; i < scanner.alert.length; i++) {
-                    scanner.alert[i].trigger('scanner', scanner.buffer.join(''));
-                }
+                $('.page-current').trigger('scanner', scanner.buffer.join(''));
             }
             scanner.scanStart = 0;
             scanner.buffer = [];
@@ -102,6 +99,11 @@ function Initial_StartSpanish_ClickHandler(e)
     //TODO: change location profile to spanish.
     OpenPage('#page-checkout', PAGE_OUT_POSITION.BOTTOM);
 }
+function Initial_ScannerHandler(e, sku) 
+{
+    Initial_StartEnglish_ClickHandler(e);
+    AddItemToReceipt(sku);
+}
 function Checkout_BeforeOpenHandler(e) 
 {
     scanner.scanning = true;
@@ -112,6 +114,7 @@ function Checkout_AfterCloseHandler(e)
 }
 function Checkout_ScannerHandler(e, sku) 
 {
+    LargeItem_Cancel_ClickHandler();
     AddItemToReceipt(sku);
 }
 function Checkout_LookupItem_ClickHandler(e)
@@ -270,6 +273,8 @@ function ProductSearch(query)
 function AddItemToReceipt(sku)
 {
     CurrentSession.receipt.addItem(sku);
+    var receipt = $('#page-checkout .receipt-container .receipt');
+    receipt.scrollTop(receipt.prop("scrollHeight"));
     $('#page-checkout .receipt-container .receipt-totals .receipt-subtotal .amount').html(FormatCurrency(CurrentSession.receipt.getSubTotal()));
     $('#page-checkout .receipt-container .receipt-totals .receipt-tax .amount').html(FormatCurrency(CurrentSession.receipt.getTaxes()));
     $('#page-checkout .receipt-container .receipt-totals .receipt-total .amount').html(FormatCurrency(CurrentSession.receipt.getGrandTotal()));
