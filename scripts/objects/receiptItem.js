@@ -19,18 +19,18 @@ function RecieptItem(product)
         }
         
         return total;
-    }
+    };
     
     this.setWeight = function(weight)
     {
-        this.weight = weight;
-    }
+        self.weight = weight;
+    };
     
     this.getReceiptItem = function()
     {
         var receiptItem = $('<div class="receipt-item"></div>');
         receiptItem.append('<span class="product-name">' + self.product.name + '</span>');
-        receiptItem.append('<span class="product-total"><span class="currency">' + CurrentSession.currency + '</span><span class="total">' + self.getTotalPrice() + '</span></span>');
+        receiptItem.append('<span class="product-total"><span class="currency">' + CurrentSession.currency + '</span><span class="total">' + FormatCurrency(self.getTotalPrice(), true) + '</span></span>');
         return receiptItem;
-    }
+    };
 }

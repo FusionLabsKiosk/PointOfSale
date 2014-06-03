@@ -2,6 +2,8 @@
 var data = {};
 
 data.products = {};
+data.productsSku = {};
+data.productsUpc = {};
 data.productArray = [];
 
 
@@ -24,6 +26,8 @@ data.initializeJson = function(json) {
         p.imageUrl = json.products[i].imageUrl;
         
         data.products[p.sku] = p;
+        data.productsSku[p.sku] = p;
+        data.productsUpc[p.upc] = p;
         data.productArray.push(p);
     }
 };

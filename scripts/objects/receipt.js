@@ -5,15 +5,20 @@ function Receipt() {
     this.recieptItems = [];
     this.payment = new Payment();
     
-    this.addItem = function(sku)
+    this.addItem = function(id)
     {
-        var product = data.products[sku];
-        var receiptItem = new RecieptItem(product);
-        this.recieptItems.push(receiptItem);
-        var receipt = $('#page-checkout .receipt-container .receipt');
-        var receiptItemHTML = receiptItem.getReceiptItem();
-        receipt.append(receiptItemHTML);
-    }
+        var product = data.productsSku[id];
+        if (product === undefined) {
+            product = data.productsUpc[id];
+        }
+        if (product !== undefined) {
+            var receiptItem = new RecieptItem(product);
+            self.recieptItems.push(receiptItem);
+            var receipt = $('#page-checkout .receipt-container .receipt');
+            var receiptItemHTML = receiptItem.getReceiptItem();
+            receipt.append(receiptItemHTML);
+        }
+    };
     
     this.getSubTotal = function() {
         var sub = 0;
@@ -27,10 +32,10 @@ function Receipt() {
     {
         var sub = self.getSubTotal();
         return sub * .0825;
-    }
+    };
     
     this.getDiscountTotal = function() {
-        var discount = 0;
+        var discount = 0.00;
         for (var i = 0; i < self.recieptItems.length; i++) {
             discount += self.recieptItems[i].getTotalPrice();
         }
