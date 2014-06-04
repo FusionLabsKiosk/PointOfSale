@@ -288,13 +288,16 @@ button{font-family:'open_sanscondensed_light' sans-serif;}
     margin-right:1em;
 }
 
-/*page-checkout*/
-#page-checkout .page-container .content
+/*receipt and common classes*/
+#page-checkout .page-container .content,
+#page-payment-options .page-container .content,
+#page-payment .page-container .content
 {
     display:flex;
     padding:1em;
 }
-#page-checkout .receipt-container
+
+.receipt-container
 {
     flex:2;
     margin-right: 1em;
@@ -303,7 +306,7 @@ button{font-family:'open_sanscondensed_light' sans-serif;}
     box-shadow: 0px 5px 20px -3px #ddd;
     font-size:1.2em;
 }
-#page-checkout .receipt-container header
+.receipt-container header
 {
     background-color: #96C651;
     font-size: 1.7em;
@@ -312,7 +315,7 @@ button{font-family:'open_sanscondensed_light' sans-serif;}
     flex:.25;
     border: solid 1px #7FA844;
 }
-#page-checkout .receipt-container .receipt
+.receipt-container .receipt
 {
     border-left: solid 1px #ccc;
     border-right: solid 1px #ccc;
@@ -322,20 +325,20 @@ button{font-family:'open_sanscondensed_light' sans-serif;}
     overflow: auto;
     padding:.5em;
 }
-#page-checkout .receipt-container .receipt .receipt-item {
+.receipt-container .receipt .receipt-item {
     display: flex;
     justify-content: space-between;
 }
-#page-checkout .receipt-container .receipt .receipt-item .product-total {
+.receipt-container .receipt .receipt-item .product-total {
     text-align: right;
 }
-#page-checkout .receipt-container .receipt-divider
+.receipt-container .receipt-divider
 {
     margin:0 2em;
     background-color:#ccc;
     height:1px;
 }
-#page-checkout .receipt-container .receipt-totals
+.receipt-container .receipt-totals
 {
     flex:2;
     border-left: solid 1px #ccc;
@@ -348,38 +351,41 @@ button{font-family:'open_sanscondensed_light' sans-serif;}
     flex-direction: column;
     justify-content: center;
 }
-#page-checkout .receipt-container .receipt-totals .total
+.receipt-container .receipt-totals .total
 {
     display:flex;
     margin-left: 5em;
     justify-content: space-between;
 }
-#page-checkout .receipt-container .receipt-totals .total .title
+.receipt-container .receipt-totals .total .title
 {
     text-align:right;
 }
-#page-checkout .receipt-container .receipt-totals .total .amount
+.receipt-container .receipt-totals .total .amount
 {
     text-align:left;
 }
-#page-checkout .receipt-container .receipt-totals .receipt-subtotal,
-#page-checkout .receipt-container .receipt-totals .receipt-taxes
+.receipt-container .receipt-totals .receipt-subtotal,
+.receipt-container .receipt-totals .receipt-taxes
 {
     color:#666;
 }
-#page-checkout .receipt-container .receipt-totals .title
+.receipt-container .receipt-totals .title
 {
     font-weight:bold;
 }
-#page-checkout .receipt-container .receipt-totals .receipt-total
+.receipt-container .receipt-totals .receipt-total
 {
     font-size:1.2em;
 }
 
-#page-checkout .checkout-container
+.page-actions-container
 {
     flex:3;
 }
+
+/*page-checkout*/
+
 
 /*page-lookup*/
 #page-lookup .content
@@ -516,6 +522,11 @@ button{font-family:'open_sanscondensed_light' sans-serif;}
 	50% { -webkit-transform: translateX(5%);}
 	100% { -webkit-transform: translateX(-100%);opacity:0;}
 }
+
+/*page-payment-options*/
+/*page-invalid-payment-type*/
+/*page-payment*/
+/*page-complete*/
 
 /*loading animation*/
 .loading-animation  

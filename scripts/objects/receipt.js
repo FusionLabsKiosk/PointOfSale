@@ -14,7 +14,7 @@ function Receipt() {
         if (product !== undefined) {
             var receiptItem = new RecieptItem(product);
             self.recieptItems.push(receiptItem);
-            var receipt = $('#page-checkout .receipt-container .receipt');
+            var receipt = $('.receipt-container .receipt');
             var receiptItemHTML = receiptItem.getReceiptItem();
             receipt.append(receiptItemHTML);
         }

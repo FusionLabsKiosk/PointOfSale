@@ -8,11 +8,11 @@
         "description": "Start the application in English"
     },
     "startButtonSpanish": {
-        "message": "Start Spanish",
+        "message": "Start Espa&ntilde;ol",
         "description": "Start the application in Spanish"
     },
     "callAttendent": {
-        "message": "Call Attendent",
+        "message": "Call Attendant",
         "description": "Notifies an attendant that help is needed"
     },
     "returnMainMenu": {

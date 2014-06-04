@@ -1,7 +1,7 @@
 function InitializeLocales() {
     $('.store-name').html(chrome.i18n.getMessage('storeName'));
-    $('.start-button .english').html(chrome.i18n.getMessage('startButtonEnglish'));
-    $('.start-button .spanish').html(chrome.i18n.getMessage('startButtonSpanish'));
+    $('.start-button.english').html(chrome.i18n.getMessage('startButtonEnglish'));
+    $('.start-button.spanish').html(chrome.i18n.getMessage('startButtonSpanish'));
     $('.call-attendent').html(chrome.i18n.getMessage('callAttendent'));
     $('.return-main-menu').html(chrome.i18n.getMessage('returnMainMenu'));
     $('.return-checkout').html(chrome.i18n.getMessage('returnCheckout'));

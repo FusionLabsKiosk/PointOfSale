@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="checkout-container">
+                        <div class="page-actions-container">
                             <div class="checkout-options">
                                 <button id="lookup-item" class="checkout-option">Lookup Item</button>
                                 <button id="large-item" class="checkout-option">Large Item</button>
@@ -112,6 +112,12 @@
                         <button class="return-checkout">Return to Checkout</button>
                         <button class="return-main-menu">Cancel Transaction</button>
                     </footer>
+                    <div class="overlay">
+                        <div class="background"></div>
+                        <div class="foreground">
+                            <div class="foreground-container"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="page" id="page-payment-options">
@@ -121,11 +127,60 @@
                         <span class="page-title">Payment Method</span>
                     </header>
                     <div class="content">
-                        <div class="payment-methods">
-                            <p>Select your method of payment.</p>
-                            <button class="payment-method cash">Cash</button>
-                            <button class="payment-method card">Credit/Debit</button>
+                        <div class="receipt-container">
+                            <header>My Items(mis art&iacute;culos)</header>
+                            <div class="receipt"></div>
+                            <div class="receipt-divider"></div>
+                            <div class="receipt-totals">
+                                <div class="receipt-subtotal total">
+                                    <span class="title">Subtotal</span>
+                                    <span class="amount"></span>
+                                </div>
+                                <div class="receipt-tax total">
+                                    <span class="title">Sales Tax</span>
+                                    <span class="amount"></span>
+                                </div>
+                                <div class="receipt-total total">
+                                    <span class="title">Total</span>
+                                    <span class="amount"></span>
+                                </div>
+                            </div>
                         </div>
+                        <div class="page-actions-container">
+                            <div class="payment-methods">
+                                <p>Select your method of payment.</p>
+                                <button class="payment-method card">Card</button>
+                                <button class="payment-method cash invalid">Cash</button>
+                                <button class="payment-method cash invalid">Check</button>
+                                <button class="payment-method cash invalid">Other</button>
+                            </div>
+                        </div>
+                    </div>
+                    <footer>
+                        <button class="call-attendent">Call Attendent</button>
+                        <button class="return-checkout">Return to Checkout</button>
+                        <button class="return-main-menu">Cancel Transaction</button>
+                    </footer>
+                    <div class="overlay">
+                        <div class="background"></div>
+                        <div class="foreground">
+                            <div class="foreground-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page" id="page-invalid-payment-type">
+                <div class="page-container">
+                    <header>
+                        <span class="store-name">I/0 Mart</span>
+                        <span class="page-title">Payment</span>
+                    </header>
+                    <div class="content">
+                        <div class="invalid-message">
+                            <p>We're sorry, this device is currently set to only accept Credit Card or Debit as payment types. We apologize for the inconvenience.</p>
+                            <p>Please select "Back to Payment Types" to choose a valid payment type, or wait for an attendant to complete your transaction.</p>
+                        </div>
+                        <button class="return-payment-methods">Back to Payment Types</button>
                     </div>
                     <footer>
                         <button class="call-attendent">Call Attendent</button>
@@ -147,15 +202,37 @@
                         <span class="page-title">Payment</span>
                     </header>
                     <div class="content">
-                        <div class="prompt-to-swipe">Use the Pinpad device to complete your transaction</div>
-                        <div class="loading-animation">
-                            <span id="bubble_1">
-                            </span>
-                            <span id="bubble_2">
-                            </span>
-                            <span id="bubble_3">
-                            </span>
+                        <div class="receipt-container">
+                            <header>My Items(mis art&iacute;culos)</header>
+                            <div class="receipt"></div>
+                            <div class="receipt-divider"></div>
+                            <div class="receipt-totals">
+                                <div class="receipt-subtotal total">
+                                    <span class="title">Subtotal</span>
+                                    <span class="amount"></span>
+                                </div>
+                                <div class="receipt-tax total">
+                                    <span class="title">Sales Tax</span>
+                                    <span class="amount"></span>
+                                </div>
+                                <div class="receipt-total total">
+                                    <span class="title">Total</span>
+                                    <span class="amount"></span>
+                                </div>
+                            </div>
                         </div>
+                        <div class="page-actions-container">
+                            <div class="prompt-to-swipe">Use the Pinpad device to complete your transaction</div>
+                            <div class="loading-animation">
+                                <span id="bubble_1">
+                                </span>
+                                <span id="bubble_2">
+                                </span>
+                                <span id="bubble_3">
+                                </span>
+                            </div>
+                        </div>
+                        
                     </div>
                     <footer>
                         <button class="call-attendent">Call Attendent</button>

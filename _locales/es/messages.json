@@ -1,0 +1,66 @@
+{
+    "storeName": {
+        "message": "I/O Mart",
+        "description": "The name of the store"
+    },
+    "startButtonEnglish": {
+        "message": "Start English",
+        "description": "Start the application in English"
+    },
+    "startButtonSpanish": {
+        "message": "Start Espa&ntilde;ol",
+        "description": "Start the application in Spanish"
+    },
+    "callAttendent": {
+        "message": "Llamar al asistente",
+        "description": "Notifies an attendant that help is needed"
+    },
+    "returnMainMenu": {
+        "message": "Cancelar Transacci&oacute;n",
+        "description": "Cancels the current transaction and returns to the main menu"
+    },
+    "returnCheckout": {
+        "message": "Volver a la comprobaci&oacute;n",
+        "description": "Returns to the checkout screen"
+    },
+    
+    "pageCheckoutTitle": {
+        "message": "Caja",
+        "description": "The checkout page title"
+    },
+    "pageCheckoutReceiptHeader": {
+        "message": "Mis Art&iacute;culos",
+        "description": "The header of the receipt items"
+    },
+    "pageCheckoutSubtotalTitle": {
+        "message": "Total Parcial",
+        "description": "The subtotal of all the receipt items"
+    },
+    "pageCheckoutTaxTitle": {
+        "message": "Impuesto",
+        "description": "The total tax of all the receipt items"
+    },
+    "pageCheckoutTotalTitle": {
+        "message": "Total",
+        "description": "The grand total of all the receipt items"
+    },
+    
+    "lookupItem": {
+        "message": "Buscar art&iacute;culo",
+        "description": "Prompts the user to look up an item by name/picture"
+    },
+    "largeItem": {
+        "message": "Gran art&iacute;culo",
+        "description": "Calls the cashier to scan a large item"
+    },
+    "typeInSku": {
+        "message": "Teclear en SKU",
+        "description": "Allows the user to type in an SKU instead of scanning"
+    },
+    "payNow": {
+        "message": "Pague ahora",
+        "description": "Starts the payment process"
+    }
+    
+    
+}
