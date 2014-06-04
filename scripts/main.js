@@ -14,7 +14,15 @@ function Init()
     data.initialize();
     AddListeners();
     ReturnMainMenu_ClickHandler();
-    document.getElementById('background-video').play();
+    $(".helper-images > div:gt(0)").hide();
+//    setInterval(function() { 
+//      $('.helper-images > div:first')
+//        .fadeOut(3000)
+//        .next()
+//        .fadeIn(3000)
+//        .end()
+//        .appendTo('.helper-images');
+//    },  3000);
 }
 function Reinit()
 {
@@ -24,8 +32,10 @@ function Reinit()
     cardReader.reading = false;
     scale.active = false;
     
-    $('#page-checkout .receipt').empty();
-    $('#page-checkout .total .amount').html('$0.00');
+    $('.receipt').empty();
+    $('.total .amount').html('$0.00');
+    
+    $('#page-checkout #pay-now').removeClass('active');
 }
 
 function AddListeners()
@@ -36,6 +46,8 @@ function AddListeners()
     $('#page-initial .start-button.english').click(Initial_StartEnglish_ClickHandler);
     $('#page-initial .start-button.spanish').click(Initial_StartSpanish_ClickHandler);
     $('#page-initial').on('scanner', Initial_ScannerHandler);
+    $('#page-initial').on('beforeopen', Initial_BeforeOpenHandler);
+    $('#page-initial').on('afterclose', Initial_AfterCloseHandler);
     
     $('#page-checkout').on('beforeopen', Checkout_BeforeOpenHandler);
     $('#page-checkout').on('afterclose', Checkout_AfterCloseHandler);
@@ -57,13 +69,14 @@ function AddListeners()
     $('#page-payment').on('afterclose', Payment_AfterCloseHandler);
     $('#page-payment').on('cardReader', Payment_CardReaderHandler);
     
-    $('#page-invalid-payment-type .return-payment-methods').click(InvalidPaymentType_ReturnPaymentMethods_ClickHandler);
-    
     $('#page-complete').on('afteropen', Complete_AfterOpenHandler);
+    $('#page-complete').on('beforeopen', Complete_BeforeOpenHandler);
+    $('#page-complete').on('afterclose', Complete_AfterCloseHandler);
     
     $('.return-checkout').click(ReturnCheckout_ClickHandler);
     $('.return-main-menu').unbind('click').click(ReturnMainMenu_ClickHandler);
     $('.call-attendent').unbind('click').click(CallAttendent_ClickHandler);
+    $('.return-payment-methods').click(InvalidPaymentType_ReturnPaymentMethods_ClickHandler);
     
     $('#overlay-large-item').click(LargeItem_Cancel_ClickHandler);
     $('#overlay-large-item').on('scanner', LargeItem_Cancel_ClickHandler);
@@ -171,6 +184,14 @@ function Initial_ScannerHandler(e, sku)
 {
     Initial_StartEnglish_ClickHandler(e);
     AddItemToReceipt(sku);
+}
+function Initial_BeforeOpenHandler(e)
+{
+    document.getElementById('background-video').play();
+}
+function Initial_AfterCloseHandler(e)
+{
+    document.getElementById('background-video').pause();
 }
 function Checkout_BeforeOpenHandler(e) 
 {
@@ -286,6 +307,14 @@ function Complete_AfterOpenHandler(e)
        ReturnMainMenu_ClickHandler(); 
     }, 3000);
 }
+function Complete_BeforeOpenHandler(e)
+{
+    document.getElementById('complete-video').play();
+}
+function Complete_AfterCloseHandler(e)
+{
+    document.getElementById('complete-video').pause();
+}
 
 function ReturnMainMenu_ClickHandler(e)
 {
@@ -325,22 +354,25 @@ function CallAttendent_Continue_ClickHandler(e)
 //Actions
 function SetLanguage(json)
 {
-    $('.store-name').html(json.storeName);
+    $('.store-name').html(json.storeName.message);
     $('.start-button.english').html(json.startButtonEnglish.message);
     $('.start-button.spanish').html(json.startButtonSpanish.message);
-    $('.call-attendent').html(json.callAttendent.message);
-    $('.return-main-menu').html(json.returnMainMenu.message);
-    $('.return-checkout').html(json.returnCheckout.message);
+    $('.call-attendent .title').html(json.callAttendent.message);
+    $('.return-main-menu .title').html(json.returnMainMenu.message);
+    $('.return-checkout .title').html(json.returnCheckout.message);
     
     $('#page-checkout .page-title').html(json.pageCheckoutTitle.message);
-    $('#page-checkout .receipt-container header').html(json.pageCheckoutReceiptHeader.message);
-    $('#page-checkout .receipt-subtotal .title').html(json.pageCheckoutSubtotalTitle.message);
-    $('#page-checkout .receipt-tax .title').html(json.pageCheckoutTaxTitle.message);
-    $('#page-checkout .receipt-total .title').html(json.pageCheckoutTotalTitle.message);
+    $('.receipt-container header').html(json.pageCheckoutReceiptHeader.message);
+    $('.receipt-subtotal .title').html(json.pageCheckoutSubtotalTitle.message);
+    $('.receipt-tax .title').html(json.pageCheckoutTaxTitle.message);
+    $('.receipt-total .title').html(json.pageCheckoutTotalTitle.message);
     
-    $('#lookup-item').html(json.lookupItem.message);
-    $('#large-item').html(json.largeItem.message);
-    $('#type-in-sku').html(json.typeInSku.message);
+    $('#lookup-item .title').html(json.lookupItemTitle.message);
+    $('#lookup-item .description').html(json.lookupItemDescription.message);
+    $('#large-item .title').html(json.largeItemTitle.message);
+    $('#large-item .description').html(json.largeItemDescription.message);
+    $('#type-in-sku .title').html(json.typeInSkuTitle.message);
+    $('#type-in-sku .description').html(json.typeInSkuDescription.message);
     $('#pay-now').html(json.payNow.message);
     
     //TODO: Continue at #page-lookup
@@ -407,6 +439,15 @@ function AddItemToReceipt(sku)
     $('.receipt-container .receipt-totals .receipt-subtotal .amount').html(FormatCurrency(CurrentSession.receipt.getSubTotal()));
     $('.receipt-container .receipt-totals .receipt-tax .amount').html(FormatCurrency(CurrentSession.receipt.getTaxes()));
     $('.receipt-container .receipt-totals .receipt-total .amount').html(FormatCurrency(CurrentSession.receipt.getGrandTotal()));
+    
+    if(CurrentSession.receipt.recieptItems.length > 0)
+    {
+        $('#page-checkout #pay-now').addClass('active');
+    }
+    else
+    {
+        $('#page-checkout #pay-now').removeClass('active');
+    }
 }
 
 function UpdateProgress_SearchTimer(interval)

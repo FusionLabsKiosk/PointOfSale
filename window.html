@@ -60,19 +60,44 @@
                             </div>
                         </div>
                         <div class="page-actions-container">
+                            <div class="helper-images">
+<!--
+                               <div>
+                                   <img src="images/kioskphoto1.jpg" />
+                               </div>
+                               <div>
+                                   <img src="images/kioskphoto2.jpg" />
+                               </div>
+                               <div>
+                                   <img src="images/kioskphoto3.jpg" />
+                               </div>
+-->
+                            </div>
                             <div class="checkout-options">
-                                <button id="lookup-item" class="checkout-option">Lookup Item</button>
-                                <button id="large-item" class="checkout-option">Large Item</button>
-                                <button id="type-in-sku" class="checkout-option">Type in SKU</button>
+                                <button id="lookup-item" class="checkout-option">
+                                    <img class="icon" src="images/lookup-item.png" width="100" height="100" />
+                                    <div class="title">Lookup Item</div>
+                                    <div class="description">Browse through our products and find an item by name.</div>
+                                </button>
+                                <button id="large-item" class="checkout-option">
+                                    <img class="icon" src="images/large-item.png" width="100" height="100" />
+                                    <div class="title">Large Item</div>
+                                    <div class="description">Call an attendant to scan a large or heavy item in your cart.</div>
+                                </button>
+                                <button id="type-in-sku" class="checkout-option">
+                                    <img class="icon" src="images/enter-sku.png" width="100" height="100" />
+                                    <div class="title">Type in SKU</div>
+                                    <div class="description">Add an item using the products SKU number.</div>
+                                </button>
                             </div>
                             <div class="payment-options">                                
-                                <button id="pay-now" class="checkout-option">Pay Now</button>
+                                <button id="pay-now">Pay Now</button>
                             </div>
                         </div>
                     </div>
                     <footer>
-                        <button class="call-attendent">Call Attendent</button>
-                        <button class="return-main-menu">Cancel Transaction</button>
+                        <button class="call-attendent"><img src="images/call-attendant.png" width="25" height="25"/><span class="title">Call Attendent</span></button>
+                        <button class="return-main-menu"><img src="images/cancel.png" width="25" height="25"/><span class="title">Cancel Transaction</span></button>
                     </footer>
                     <div class="overlay">
                         <div class="background"></div>
@@ -97,7 +122,56 @@
                             <input type="text" id="item-search-query" />
                             <progress id="search-timer-progress" value="0" max="200"></progress>
                             <div class="user-input">
-                                <div class="keyboard"></div>
+                                <div class="keyboard-container">
+                                    <div class="keyboard">
+                                        <div class="keyrow">
+                                            <div class="key">1</div>
+                                            <div class="key">2</div>
+                                            <div class="key">3</div>
+                                            <div class="key">4</div>
+                                            <div class="key">5</div>
+                                            <div class="key">6</div>
+                                            <div class="key">7</div>
+                                            <div class="key">8</div>
+                                            <div class="key">9</div>
+                                            <div class="key">0</div>
+                                        </div>
+                                        <div class="keyrow">
+                                            <div class="key">q</div>
+                                            <div class="key">w</div>
+                                            <div class="key">e</div>
+                                            <div class="key">r</div>
+                                            <div class="key">t</div>
+                                            <div class="key">y</div>
+                                            <div class="key">u</div>
+                                            <div class="key">i</div>
+                                            <div class="key">o</div>
+                                            <div class="key">p</div>
+                                        </div>
+                                        <div class="keyrow">
+                                            <div class="key">a</div>
+                                            <div class="key">s</div>
+                                            <div class="key">d</div>
+                                            <div class="key">f</div>
+                                            <div class="key">g</div>
+                                            <div class="key">h</div>
+                                            <div class="key">j</div>
+                                            <div class="key">k</div>
+                                            <div class="key">l</div>
+                                        </div>
+                                        <div class="keyrow">
+                                            <div class="key space">Space</div>
+                                            <div class="key">z</div>
+                                            <div class="key">x</div>
+                                            <div class="key">c</div>
+                                            <div class="key">v</div>
+                                            <div class="key">b</div>
+                                            <div class="key">n</div>
+                                            <div class="key">m</div>
+                                            <div class="key back">Backspace</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <img class="item-image" src="" />
@@ -108,9 +182,9 @@
                         </div>
                     </div>
                     <footer>
-                        <button class="call-attendent">Call Attendent</button>
-                        <button class="return-checkout">Return to Checkout</button>
-                        <button class="return-main-menu">Cancel Transaction</button>
+                        <button class="call-attendent"><img src="images/call-attendant.png" width="25" height="25"/><span class="title">Call Attendent</span></button>
+                        <button class="return-checkout"><img src="images/return.png" width="25" height="25"/><span class="title">Return to Checkout</span></button>
+                        <button class="return-main-menu"><img src="images/cancel.png" width="25" height="25"/><span class="title">Cancel Transaction</span></button>
                     </footer>
                     <div class="overlay">
                         <div class="background"></div>
@@ -147,19 +221,38 @@
                             </div>
                         </div>
                         <div class="page-actions-container">
-                            <div class="payment-methods">
+                            <div class="helper-images"></div>
+                            <div class="instructions">
                                 <p>Select your method of payment.</p>
-                                <button class="payment-method card">Card</button>
-                                <button class="payment-method cash invalid">Cash</button>
-                                <button class="payment-method cash invalid">Check</button>
-                                <button class="payment-method cash invalid">Other</button>
+                            </div>
+                            <div class="payment-methods">
+                                <button class="payment-method card">
+                                    <img class="icon" src="images/cards.png" width="100" height="100" />
+                                    <div class="title">Card</div>
+                                    <div class="description">Credit/Debit</div>
+                                </button>
+                                <button class="payment-method cash invalid">
+                                    <img class="icon" src="images/cash.png" width="100" height="100" />
+                                    <div class="title">Cash</div>
+                                    <div class="description">Bills and Coins</div>
+                                </button>
+                                <button class="payment-method cash invalid">
+                                    <img class="icon" src="images/checks.png" width="100" height="100" />
+                                    <div class="title">Check</div>
+                                    <div class="description">Paper or Electronic</div>
+                                </button>
+                                <button class="payment-method cash invalid">
+                                    <img class="icon" src="images/other.png" width="100" height="100" />
+                                    <div class="title">Other</div>
+                                    <div class="description">Gift Card, WIC, etc...</div>
+                                </button>
                             </div>
                         </div>
                     </div>
                     <footer>
-                        <button class="call-attendent">Call Attendent</button>
-                        <button class="return-checkout">Return to Checkout</button>
-                        <button class="return-main-menu">Cancel Transaction</button>
+                        <button class="call-attendent"><img src="images/call-attendant.png" width="25" height="25"/><span class="title">Call Attendent</span></button>
+                        <button class="return-checkout"><img src="images/return.png" width="25" height="25"/><span class="title">Return to Checkout</span></button>
+                        <button class="return-main-menu"><img src="images/cancel.png" width="25" height="25"/><span class="title">Cancel Transaction</span></button>
                     </footer>
                     <div class="overlay">
                         <div class="background"></div>
@@ -176,16 +269,17 @@
                         <span class="page-title">Payment</span>
                     </header>
                     <div class="content">
-                        <div class="invalid-message">
+                        <div class="helper-images"></div>
+                        <div class="instructions">
                             <p>We're sorry, this device is currently set to only accept Credit Card or Debit as payment types. We apologize for the inconvenience.</p>
                             <p>Please select "Back to Payment Types" to choose a valid payment type, or wait for an attendant to complete your transaction.</p>
                         </div>
                         <button class="return-payment-methods">Back to Payment Types</button>
                     </div>
                     <footer>
-                        <button class="call-attendent">Call Attendent</button>
-                        <button class="return-checkout">Return to Checkout</button>
-                        <button class="return-main-menu">Cancel Transaction</button>
+                        <button class="call-attendent"><img src="images/call-attendant.png" width="25" height="25"/><span class="title">Call Attendent</span></button>
+                        <button class="return-checkout"><img src="images/return.png" width="25" height="25"/><span class="title">Return to Checkout</span></button>
+                        <button class="return-main-menu"><img src="images/cancel.png" width="25" height="25"/><span class="title">Cancel Transaction</span></button>
                     </footer>
                     <div class="overlay">
                         <div class="background"></div>
@@ -222,22 +316,26 @@
                             </div>
                         </div>
                         <div class="page-actions-container">
-                            <div class="prompt-to-swipe">Use the Pinpad device to complete your transaction</div>
-                            <div class="loading-animation">
-                                <span id="bubble_1">
-                                </span>
-                                <span id="bubble_2">
-                                </span>
-                                <span id="bubble_3">
-                                </span>
+                            <img src="images/pinpad-device.jpg" />
+                            <div class="instructions">Use the Pinpad device to complete your transaction</div>
+                            <div class="loading-container">
+                                <div class="loading-animation">
+                                    <span id="bubble_1">
+                                    </span>
+                                    <span id="bubble_2">
+                                    </span>
+                                    <span id="bubble_3">
+                                    </span>
+                                </div>
                             </div>
+                            <button class="return-payment-methods">Back to Payment Types</button>
                         </div>
                         
                     </div>
                     <footer>
-                        <button class="call-attendent">Call Attendent</button>
-                        <button class="return-checkout">Return to Checkout</button>
-                        <button class="return-main-menu">Cancel Transaction</button>
+                        <button class="call-attendent"><img src="images/call-attendant.png" width="25" height="25"/><span class="title">Call Attendent</span></button>
+                        <button class="return-checkout"><img src="images/return.png" width="25" height="25"/><span class="title">Return to Checkout</span></button>
+                        <button class="return-main-menu"><img src="images/cancel.png" width="25" height="25"/><span class="title">Cancel Transaction</span></button>
                     </footer>
                     <div class="overlay">
                         <div class="background"></div>
@@ -254,7 +352,10 @@
                         <span class="page-title">Transaction Complete</span>
                     </header>
                     <div class="content">
-                        <div class="transaction-complete">
+                        <video loop="true" poster="images/video_poster.png" id="complete-video">
+                            <source src="videos/Green_Leaves_Bokeh_with_Lens_Flare_-_Free_HD_Stock.webm" type="video/webm">
+                        </video>
+                        <div class="instructions">
                             <div class="complete-thanks">Thank you for shopping with us!</div>
                             <div class="complete-remove-bags">Please remove your bags from the bagging area, and take you receipt.</div>
                         </div>
@@ -268,7 +369,7 @@
         <div class="hidden">
             <div id="overlays">
                 <div id="overlay-large-item" class="foreground-content">
-                    <img class="foreground-image" src="" width="200" height="200" />
+                    <img class="foreground-image" src="images/large-item.png" width="200" height="200" />
                     <div class="foreground-form">
                         <p>Please wait and an attendant will be with you shortly to scan your large item.</p>
                         <div class="actions">
@@ -277,19 +378,70 @@
                     </div>
                 </div>
                 <div id="overlay-type-in-sku" class="foreground-content">
-                    <img class="foreground-image" src="" width="200" height="200" />
+                    <img class="foreground-image" src="images/enter-sku.png" width="200" height="200" />
                     <div class="foreground-form">
                         <p>Use the on screen keyboard to enter a product's SKU, then select "Continue" to add it to your items.</p>
-                        <input id="sku-query" />
-                        <div class="keyboard"></div>
-                        <div class="actions">
-                            <button class="cancel">Cancel</button>
-                            <button class="continue">Continue</button>
+                        <div class="user-input">
+                            <input id="sku-query" type="text" />
+                            <div class="actions">
+                                <button class="cancel">Cancel</button>
+                                <button class="continue">Continue</button>
+                            </div>
+                        </div>
+                        <div class="keyboard-container">
+                            <div class="keyboard">
+                                <div class="keyrow">
+                                    <div class="key">1</div>
+                                    <div class="key">2</div>
+                                    <div class="key">3</div>
+                                    <div class="key">4</div>
+                                    <div class="key">5</div>
+                                    <div class="key">6</div>
+                                    <div class="key">7</div>
+                                    <div class="key">8</div>
+                                    <div class="key">9</div>
+                                    <div class="key">0</div>
+                                </div>
+                                <div class="keyrow">
+                                    <div class="key">q</div>
+                                    <div class="key">w</div>
+                                    <div class="key">e</div>
+                                    <div class="key">r</div>
+                                    <div class="key">t</div>
+                                    <div class="key">y</div>
+                                    <div class="key">u</div>
+                                    <div class="key">i</div>
+                                    <div class="key">o</div>
+                                    <div class="key">p</div>
+                                </div>
+                                <div class="keyrow">
+                                    <div class="key">a</div>
+                                    <div class="key">s</div>
+                                    <div class="key">d</div>
+                                    <div class="key">f</div>
+                                    <div class="key">g</div>
+                                    <div class="key">h</div>
+                                    <div class="key">j</div>
+                                    <div class="key">k</div>
+                                    <div class="key">l</div>
+                                </div>
+                                <div class="keyrow">
+                                    <div class="key space">Space</div>
+                                    <div class="key">z</div>
+                                    <div class="key">x</div>
+                                    <div class="key">c</div>
+                                    <div class="key">v</div>
+                                    <div class="key">b</div>
+                                    <div class="key">n</div>
+                                    <div class="key">m</div>
+                                    <div class="key back">Backspace</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div id="overlay-call-attendent" class="foreground-content">
-                    <img class="foreground-image" src="" width="200" height="200" />
+                    <img class="foreground-image" src="images/call-attendant.png" width="200" height="200" />
                     <div class="foreground-form">
                         <p>An attendent has been notified and will be with you shortly. Select "Continue" to resume checking out.</p>
                         <div class="actions">

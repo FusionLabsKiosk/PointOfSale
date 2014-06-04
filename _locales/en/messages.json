@@ -45,17 +45,29 @@
         "description": "The grand total of all the receipt items"
     },
     
-    "lookupItem": {
+    "lookupItemTitle": {
         "message": "Lookup Item",
-        "description": "Prompts the user to look up an item by name/picture"
+        "description": "Title for the Lookup Item button"
     },
-    "largeItem": {
+    "lookupItemDescription": {
+        "message": "Browse through our products and find an item.",
+        "description": "Description for the Lookup Item button"
+    },
+    "largeItemTitle": {
         "message": "Large Item",
-        "description": "Calls the cashier to scan a large item"
+        "description": "Title for the Large Item button"
     },
-    "typeInSku": {
+    "largeItemDescription": {
+        "message": "Call an attendant to scan a large item in your cart.",
+        "description": "Description for the Large Item button"
+    },
+    "typeInSkuTitle": {
         "message": "Type In SKU",
-        "description": "Allows the user to type in an SKU instead of scanning"
+        "description": "Title for the Type In SKU button"
+    },
+    "typeInSkuDescription": {
+        "message": "Add an item using the products SKU number.",
+        "description": "Description for the Type In SKU button"
     },
     "payNow": {
         "message": "Pay Now",
