@@ -573,12 +573,16 @@ button{font-family:'open_sanscondensed_light' sans-serif;}
     background-position-y: -250px;
     flex:2;
 }
-
+#page-checkout .instructions
+{
+    font-size:2em;
+    text-align: center;
+}
 #page-checkout .checkout-options
 {
     display: flex;
     justify-content: space-between;
-    padding: 1em;
+    padding: 0 1em;
     flex:1.5;
 }
 #page-checkout .checkout-option
@@ -656,9 +660,7 @@ button{font-family:'open_sanscondensed_light' sans-serif;}
 	to { -webkit-transform:scale(.95);box-shadow:3px 3px 0 #DDD;}
 }
 @keyframes payNowSelected {
-	0% { -webkit-transform: translateY(0);opacity:1;}
-	50% { -webkit-transform: translateY(-5%);}
-	100% { -webkit-transform: translateY(100%);opacity:0;}
+	to { -webkit-transform:scale(.95);box-shadow:3px 3px 0 #DDD;}
 }
 
 
