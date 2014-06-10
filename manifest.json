@@ -13,5 +13,9 @@
         "128": "images/icon_128.png" 
     },
   
-  "default_locale": "en"
+  "default_locale": "en",
+  "permissions": [
+      "accessibilityFeatures.read",
+      "accessibilityFeatures.modify"
+  ]
 }
