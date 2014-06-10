@@ -29,7 +29,7 @@ function Reinit()
     CurrentSession = new Session();
     CurrentSession.currency = '$';
     scanner.scanning = true;
-    cardReader.reading = false;
+    swiper.scanning = false;
     scale.active = false;
     
     $('.receipt').empty();
@@ -41,7 +41,7 @@ function Reinit()
 function AddListeners()
 {
     $(document).bind('keypress', Scanner_Listener);
-    $(document).bind('keypress', CardReader_Listener);
+    swiper.addTrigger('.page-current');
     
     $('#page-initial .start-button.english').click(Initial_StartEnglish_ClickHandler);
     $('#page-initial .start-button.spanish').click(Initial_StartSpanish_ClickHandler);
@@ -67,7 +67,7 @@ function AddListeners()
     
     $('#page-payment').on('beforeopen', Payment_BeforeOpenHandler);
     $('#page-payment').on('afterclose', Payment_AfterCloseHandler);
-    $('#page-payment').on('cardReader', Payment_CardReaderHandler);
+    $('#page-payment').on(swiper.EVENT_NAME, Payment_CardReaderHandler);
     
     $('#page-complete').on('afteropen', Complete_AfterOpenHandler);
     $('#page-complete').on('beforeopen', Complete_BeforeOpenHandler);
@@ -92,12 +92,6 @@ scanner.scanning = true;
 scanner.scanStart = 0;
 scanner.buffer = [];
 scanner.delay = 250;
-
-var cardReader = {};
-cardReader.reading = false;
-cardReader.readStart = 0;
-cardReader.buffer = [];
-cardReader.delay = 250;
 
 var scale = {};
 scale.active = false;
@@ -127,39 +121,6 @@ function Scanner_Listener(e)
         }
         else {
             scanner.buffer.push(String.fromCharCode(e.keyCode));
-        }
-    }
-}
-function CardReader_Listener(e) 
-{
-    if (cardReader.reading) {
-        e.preventDefault();
-        
-        if (cardReader.readStart === 0) {
-            cardReader.readStart = Date.now();
-        }
-        if ((Date.now() - cardReader.readStart) > cardReader.delay) {
-            //If too much time has passed since the start, reset
-            cardReader.readStart = 0;
-            cardReader.readEnd = 0;
-            cardReader.buffer = [];
-            return;
-        }
-        
-        if(e.keyCode == 96)
-        {
-            $('.page-current').trigger('cardReader', '');
-        }
-        
-        if (e.keyCode === 13) {
-            if ((Date.now() - cardReader.readStart) < cardReader.delay) {
-                $('.page-current').trigger('cardReader', cardReader.buffer.join(''));
-            }
-            cardReader.readStart = 0;
-            cardReader.buffer = [];
-        }
-        else {
-            cardReader.buffer.push(String.fromCharCode(e.keyCode));
         }
     }
 }
@@ -290,11 +251,11 @@ function InvalidPaymentType_ReturnPaymentMethods_ClickHandler(e)
 }
 function Payment_BeforeOpenHandler(e) 
 {
-    cardReader.reading = true;
+    swiper.scanning = true;
 }
 function Payment_AfterCloseHandler(e) 
 {
-    cardReader.reading = false;
+    swiper.scanning = false;
 }
 function Payment_CardReaderHandler(e, cardData)
 {
