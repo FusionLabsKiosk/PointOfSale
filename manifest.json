@@ -17,5 +17,6 @@
   "permissions": [
       "accessibilityFeatures.read",
       "accessibilityFeatures.modify"
-  ]
+  ],
+  "kiosk_enabled": true
 }
