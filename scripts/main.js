@@ -56,8 +56,10 @@ function AddListeners()
     $('#page-checkout #large-item').click(Checkout_LargeItem_ClickHandler);
     $('#page-checkout #type-in-sku').click(Checkout_TypeInSKU_ClickHandler);
     $('#page-checkout #pay-now').click(Checkout_PayNow_ClickHandler);
+    $('#overlay-type-in-sku').on('afteropen', TypeInSKU_AfterOpenHandler);
     
     $('#page-lookup').on('beforeopen', Lookup_BeforeOpenHandler);
+    $('#page-lookup').on('afteropen', Lookup_AfterOpenHandler);
     $('#page-lookup').on('beforesearch', Lookup_BeforeSearchHandler);
     $('#page-lookup').on('aftersearch', Lookup_AfterSearchHandler);
     $('#page-lookup #item-search-query').keyup(Lookup_ItemSearchQuery_KeyUpHandler);
@@ -185,9 +187,17 @@ function Checkout_PayNow_ClickHandler(e)
 {
     OpenPage('#page-payment-options', PAGE_OUT_POSITION.BOTTOM);
 }
+function TypeInSKU_AfterOpenHandler(e) 
+{
+    $('#sku-query').focus();
+}
 function Lookup_BeforeOpenHandler(e)
 {
     ProductSearch();
+}
+function Lookup_AfterOpenHandler(e)
+{
+    $('#page-lookup #item-search-query').focus();
 }
 function Lookup_BeforeSearchHandler(e)
 {
@@ -460,6 +470,7 @@ function OpenPage(pageName, pageOutPosition)
 
 function OpenOverlay(overlayID, page)
 {
+    $('#' + overlayID).trigger('beforeopen');
     $('.overlay', page).css('display', 'block');
     $('#overlays #' + overlayID).detach().appendTo($('.overlay .foreground .foreground-container', page));
     $('.overlay .foreground .foreground-container', page).addClass('overlay-foreground-animation-in');
@@ -469,6 +480,7 @@ function OpenOverlay(overlayID, page)
     {        
         $('.overlay .foreground .foreground-container', page).removeClass('overlay-foreground-animation-in');
         $('.overlay .background', page).removeClass('overlay-background-animation-in');
+        $('#' + overlayID).trigger('afteropen');
     }, 700);
 }
 function CloseOverlay(overlayElement, page)
