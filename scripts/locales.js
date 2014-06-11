@@ -1,4 +1,5 @@
 function InitializeLocales() {
+    return;
     $('.store-name').html(chrome.i18n.getMessage('storeName'));
     $('.start-button.english').html(chrome.i18n.getMessage('startButtonEnglish'));
     $('.start-button.spanish').html(chrome.i18n.getMessage('startButtonSpanish'));

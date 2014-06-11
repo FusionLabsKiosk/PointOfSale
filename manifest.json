@@ -18,5 +18,10 @@
       "accessibilityFeatures.read",
       "accessibilityFeatures.modify"
   ],
+  "sandbox": {
+      "pages": [
+          "scripts/scripts_sandbox.html"
+      ]
+  },
   "kiosk_enabled": true
 }

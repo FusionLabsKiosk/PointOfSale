@@ -4,16 +4,21 @@
         <link rel="stylesheet" type="text/css" href="styles/main.css">
         <script src="scripts/lib/jquery-2.1.1.min.js"></script>
         <script src="scripts/lib/jquery.velocity.min.js"></script>
+        
+        <script src="scripts/spreadsheet.js"></script>
+        <script src="scripts/data.js"></script>
+        <script src="scripts/sandbox.js"></script>
+        <script src="scripts/main.js"></script>
+        <script src="scripts/swiper.js"></script>
+        <script src="scripts/credit.js"></script>
+        <script src="scripts/locales.js"></script>
+        
         <script src="scripts/objects/product.js"></script>
         <script src="scripts/objects/session.js"></script>
         <script src="scripts/objects/receipt.js"></script>
         <script src="scripts/objects/receiptItem.js"></script>
         <script src="scripts/objects/payment.js"></script>
-        <script src="scripts/spreadsheet.js"></script>
-        <script src="scripts/data.js"></script>
-        <script src="scripts/main.js"></script>
-        <script src="scripts/swiper.js"></script>
-        <script src="scripts/locales.js"></script>
+        
     </head>
     <body>
         <div id="transition-wrapper">
@@ -344,6 +349,15 @@
                         </div>
                     </div>
                 </div>
+                <div id="overlay-error" class="foreground-content">
+                    <img class="foreground-image" src="images/call-attendant.png" width="200" height="200" />
+                    <div class="foreground-form">
+                        <p class="error"></p>
+                        <div class="actions">
+                            <button class="continue">Continue</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="modules">
                 <div class="loading-animation">
@@ -356,6 +370,6 @@
                 </div>
             </div>
       </div>
-
+        <iframe id="scripts-sandbox" class="hidden" src="scripts/scripts_sandbox.html"></iframe>
     </body>
 </html>

@@ -12,6 +12,7 @@ function Init()
     InitializeLocales();
     var initialPage = '#page-initial';
     data.initialize();
+    sandbox.initialize();
     AddListeners();
     ReturnMainMenu_ClickHandler();
     $(".helper-images > div:gt(0)").hide();
@@ -80,6 +81,7 @@ function AddListeners()
     $('.call-attendant').unbind('click').click(CallAttendent_ClickHandler);
     $('.return-payment-methods').click(InvalidPaymentType_ReturnPaymentMethods_ClickHandler);
     
+    $('#overlay-error .continue').click(Error_Continue_ClickHandler);
     $('#overlay-large-item').click(LargeItem_Cancel_ClickHandler);
     $('#overlay-large-item').on('scanner', LargeItem_Cancel_ClickHandler);
     $('#overlay-large-item .cancel').click(LargeItem_Cancel_ClickHandler);
@@ -190,6 +192,11 @@ function Checkout_PayNow_ClickHandler(e)
 function TypeInSKU_AfterOpenHandler(e) 
 {
     $('#sku-query').focus();
+    var click = document.createEvent('Events');
+    click.initEvent('click', true, false);
+    $('#sku-query').get(0).dispatchEvent(click);
+    //TODO: See if focus+click vs click works
+    //TODO: This still doesn't work in forcing the chrome on screen keyboard up
 }
 function Lookup_BeforeOpenHandler(e)
 {
@@ -198,6 +205,8 @@ function Lookup_BeforeOpenHandler(e)
 function Lookup_AfterOpenHandler(e)
 {
     $('#page-lookup #item-search-query').focus();
+    $('#page-lookup #item-search-query').click();
+    //TODO: This still doesn't work in forcing the chrome on screen keyboard up
 }
 function Lookup_BeforeSearchHandler(e)
 {
@@ -267,9 +276,17 @@ function Payment_AfterCloseHandler(e)
 {
     swiper.scanning = false;
 }
-function Payment_CardReaderHandler(e, cardData)
+function Payment_CardReaderHandler(e, card)
 {
-    OpenPage('#page-complete', PAGE_OUT_POSITION.BOTTOM);
+    var amount = FormatDecimalFromCurrency($('#page-payment .receipt-total .amount').html());
+    credit.chargeCard(card, amount, function(response) {
+        if (response.success) {
+            OpenPage('#page-complete', PAGE_OUT_POSITION.BOTTOM);
+        }
+        else {
+            ShowError('There was a problem accepting your card: ' + response.message);
+        }
+    });
 }
 function Complete_AfterOpenHandler(e)
 {
@@ -301,6 +318,10 @@ function CallAttendent_ClickHandler(e)
     OpenOverlay('overlay-call-attendant', $('.page-current'));
 }
 
+function Error_Continue_ClickHandler(e) 
+{
+     CloseOverlay($('#overlay-large-item'), $('.page-current'));
+}
 function LargeItem_Cancel_ClickHandler(e)
 {
     CloseOverlay($('#overlay-large-item'), $('#page-checkout'));
@@ -347,6 +368,11 @@ function SetLanguage(json)
     $('#pay-now').html(json.payNow.message);
     
     //TODO: Continue at #page-lookup
+}
+
+function ShowError(message) {
+    $('#overlay-error .error').html(message);
+    OpenOverlay('overlay-error', $('.page-current'));
 }
 function ProductSearch(query)
 {
