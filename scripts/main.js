@@ -77,7 +77,7 @@ function AddListeners()
     
     $('.return-checkout').click(ReturnCheckout_ClickHandler);
     $('.return-main-menu').unbind('click').click(ReturnMainMenu_ClickHandler);
-    $('.call-attendent').unbind('click').click(CallAttendent_ClickHandler);
+    $('.call-attendant').unbind('click').click(CallAttendent_ClickHandler);
     $('.return-payment-methods').click(InvalidPaymentType_ReturnPaymentMethods_ClickHandler);
     
     $('#overlay-large-item').click(LargeItem_Cancel_ClickHandler);
@@ -85,7 +85,7 @@ function AddListeners()
     $('#overlay-large-item .cancel').click(LargeItem_Cancel_ClickHandler);
     $('#overlay-type-in-sku .cancel').click(TypeInSKU_Cancel_ClickHandler);
     $('#overlay-type-in-sku .continue').click(TypeInSKU_Continue_ClickHandler);
-    $('#overlay-call-attendent .continue').click(CallAttendent_Continue_ClickHandler);
+    $('#overlay-call-attendant .continue').click(CallAttendent_Continue_ClickHandler);
 }
 
 //Event Handlers
@@ -298,7 +298,7 @@ function ReturnCheckout_ClickHandler(e)
 }
 function CallAttendent_ClickHandler(e)
 {
-    OpenOverlay('overlay-call-attendent', $('.page-current'));
+    OpenOverlay('overlay-call-attendant', $('.page-current'));
 }
 
 function LargeItem_Cancel_ClickHandler(e)
@@ -319,7 +319,7 @@ function TypeInSKU_Continue_ClickHandler(e)
 }
 function CallAttendent_Continue_ClickHandler(e)
 {
-    CloseOverlay($('#overlay-call-attendent'), $('.page-current'));
+    CloseOverlay($('#overlay-call-attendant'), $('.page-current'));
 }
 
 //Actions
@@ -328,7 +328,7 @@ function SetLanguage(json)
     $('.store-name').html(json.storeName.message);
     $('.start-button.english').html(json.startButtonEnglish.message);
     $('.start-button.spanish').html(json.startButtonSpanish.message);
-    $('.call-attendent .title').html(json.callAttendent.message);
+    $('.call-attendant .title').html(json.callAttendent.message);
     $('.return-main-menu .title').html(json.returnMainMenu.message);
     $('.return-checkout .title').html(json.returnCheckout.message);
     

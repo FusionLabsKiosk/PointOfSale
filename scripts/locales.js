@@ -2,7 +2,7 @@ function InitializeLocales() {
     $('.store-name').html(chrome.i18n.getMessage('storeName'));
     $('.start-button.english').html(chrome.i18n.getMessage('startButtonEnglish'));
     $('.start-button.spanish').html(chrome.i18n.getMessage('startButtonSpanish'));
-    $('.call-attendent .title').html(chrome.i18n.getMessage('callAttendent'));
+    $('.call-attendant .title').html(chrome.i18n.getMessage('callAttendent'));
     $('.return-main-menu .title').html(chrome.i18n.getMessage('returnMainMenu'));
     $('.return-checkout .title').html(chrome.i18n.getMessage('returnCheckout'));
     
