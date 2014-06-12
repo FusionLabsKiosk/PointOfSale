@@ -12,7 +12,6 @@ function Init()
     InitializeLocales();
     var initialPage = '#page-initial';
     data.initialize();
-    sandbox.initialize();
     AddListeners();
     ReturnMainMenu_ClickHandler();
     $(".helper-images > div:gt(0)").hide();
@@ -70,7 +69,7 @@ function AddListeners()
     
     $('#page-payment').on('beforeopen', Payment_BeforeOpenHandler);
     $('#page-payment').on('afterclose', Payment_AfterCloseHandler);
-    $('#page-payment').on(swiper.EVENT_NAME, Payment_CardReaderHandler);
+    $('#page-payment').on(swiper.EVENT, Payment_CardReaderHandler);
     
     $('#page-complete').on('afteropen', Complete_AfterOpenHandler);
     $('#page-complete').on('beforeopen', Complete_BeforeOpenHandler);
@@ -279,7 +278,7 @@ function Payment_AfterCloseHandler(e)
 function Payment_CardReaderHandler(e, card)
 {
     var amount = FormatDecimalFromCurrency($('#page-payment .receipt-total .amount').html());
-    credit.chargeCard(card, amount, function(response) {
+    stripe.chargeCard(card, amount, function(response) {
         if (response.success) {
             OpenPage('#page-complete', PAGE_OUT_POSITION.BOTTOM);
         }
