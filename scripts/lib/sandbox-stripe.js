@@ -37,7 +37,8 @@
                 exp_month: expMonth,
                 exp_year: expYear
             }, function(status, response) {
-                console.log(JSON.stringify(response));
+                //Print Stripe response to screen for testing
+                console.log('Stripe Response: ' + JSON.stringify(response));
                 if (response.error) {
                     eventResponse.success = false;
                     eventResponse.message = response.error;
