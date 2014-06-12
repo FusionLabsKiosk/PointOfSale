@@ -1,27 +1,32 @@
 {
-  "name": "SalesPoint Chrome",
-  "description": "The SalesPoint Point-of-Sale check out kiosk app for Chrome",
-  "version": "0.0.0.1",
-  "app": {
-    "background": {
-      "scripts": ["background.js"]
-    }
-  },
+    "app": {
+        "background": {
+            "scripts": ["background.js"]
+        }
+    },
+    "manifest_version": 2,
+    "name": "SalesPoint",
+    "version": "1.0.0",
+    
+    "default_locale": "en",
+    "description": "Point-of-Sale checkout kiosk app for Chrome",
     "icons": { 
         "16": "images/icon_16.png", 
         "48": "images/icon_48.png", 
         "128": "images/icon_128.png" 
     },
-  
-  "default_locale": "en",
-  "permissions": [
-      "accessibilityFeatures.read",
-      "accessibilityFeatures.modify"
-  ],
-  "sandbox": {
-      "pages": [
-          "scripts/sandbox-scripts.html"
-      ]
-  },
-  "kiosk_enabled": true
+    
+    "author": "ChromeKioskApps@gmail.com",
+    "kiosk_enabled": true,
+    "minimum_chrome_version": 37,
+    "offline_enabled": true,
+    "permissions": [
+        "accessibilityFeatures.read",
+        "accessibilityFeatures.modify"
+    ],    
+    "sandbox": {
+        "pages": [
+            "scripts/sandbox-scripts.html"
+        ]
+    }
 }
